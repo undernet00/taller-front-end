@@ -2,12 +2,8 @@ import { useRef } from "react";
 import { useState } from "react";
 
 const Login = () => {
-  const [usuario, setUsuario] = useState("");
-  const [token, setToken] = useState("");
-  const [clave, setClave] = useState("");
   const [error, setError] = useState("");
   const [esperando, setEsperando] = useState("");
-  
 
   let campoUsuario = useRef(null);
   let campoClave = useRef(null);
@@ -26,31 +22,27 @@ const Login = () => {
         }),
       };
 
-      fetch(
-        "https://babytracker.develotion.com//login.php",
-        opcionesDeConsulta
-      ).then((res) => {
-        if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
-        }
-        
-        return res.json();
-      }).then((datos) => {
-        setUsuario(usuario);
-        setToken(datos.apiKey);
-        setEsperando(false);
-        setError(null);
-        console.log(datos)
-        window.localStorage.setItem("user", usuario);
-        window.localStorage.setItem("token", datos.apiKey);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setEsperando(false);
-      });
+      fetch("https://babytracker.develotion.com//login.php", opcionesDeConsulta)
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("no se pudo obtener datos desde el recurso");
+          }
 
-      
-      
+          return res.json();
+        })
+        .then((datos) => {
+          setEsperando(false);
+          setError(null);
+          console.log(datos);
+          window.localStorage.setItem("user", usuario);
+          window.localStorage.setItem("token", datos.apiKey);
+          window.localStorage.setItem("id_usuario", datos.id);
+          //TODO: navegar al usuario hacia el dashboard
+        })
+        .catch((err) => {
+          setError(err.message);
+          setEsperando(false);
+        });
     }
   };
 
