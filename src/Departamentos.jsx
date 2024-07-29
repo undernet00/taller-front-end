@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Departamento from "./Departamento";
+import * as Const from "./Constantes"
 
 const Departamentos = () => {
   const [departamentos, setDepartamentos] = useState([]);
@@ -7,7 +8,7 @@ const Departamentos = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("https://babytracker.develotion.com//departamentos.php")
+    fetch(Const.URL_EVENTOS)
       .then((res) => {
         if (!res.ok) {
           throw Error("no se pudo obtener datos desde el recurso");

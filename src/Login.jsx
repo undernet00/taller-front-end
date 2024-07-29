@@ -1,12 +1,22 @@
 import { useRef } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import * as Const from "./Constantes";
 
 const Login = () => {
   const [error, setError] = useState("");
   const [esperando, setEsperando] = useState("");
+  const [estaLogueado, setEstaLogueado] = useState(false);
 
   let campoUsuario = useRef(null);
   let campoClave = useRef(null);
+
+  useEffect(() => {
+    let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
+    let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
+
+    setEstaLogueado(usuario !== "" && apikey !== "");
+  }, []);
 
   const login = () => {
     let usuario = campoUsuario.current.value;
@@ -22,7 +32,7 @@ const Login = () => {
         }),
       };
 
-      fetch("https://babytracker.develotion.com//login.php", opcionesDeConsulta)
+      fetch(Const.URL_LOGIN, opcionesDeConsulta)
         .then((res) => {
           if (!res.ok) {
             throw Error("no se pudo obtener datos desde el recurso");
@@ -31,21 +41,31 @@ const Login = () => {
           return res.json();
         })
         .then((datos) => {
+          window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
+          window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
+          window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
+
           setEsperando(false);
           setError(null);
-          console.log(datos);
-          window.localStorage.setItem("user", usuario);
-          window.localStorage.setItem("token", datos.apiKey);
-          window.localStorage.setItem("id_usuario", datos.id);
+          setEstaLogueado(true);
+
           //TODO: navegar al usuario hacia el dashboard
         })
         .catch((err) => {
           setError(err.message);
           setEsperando(false);
+          setEstaLogueado(false);
         });
     }
   };
 
+  if (estaLogueado) {
+    return (
+      <div>
+        <p>Sesión iniciada.</p>
+      </div>
+    );
+  }
   return (
     <div>
       <label htmlFor="user">Usuario</label>

@@ -7,17 +7,17 @@ const Eventos = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    const idUsuario = window.localStorage.getItem("id_usuario");
+    const apikey = window.localStorage.getItem("apikey");
+    const idUsuario = window.localStorage.getItem("idusuario");
 
-    if (token === "" || idUsuario === "") {
-      cconsole.log("falta token o id de usuarios");
+    if (apikey === "" || idUsuario === "") {
+      console.log("falta token o id de usuario");
       return;
     }
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("apikey", token);
+    headers.append("apikey", apikey);
     headers.append("iduser", idUsuario);
 
     const opcionesDeConsulta = {
