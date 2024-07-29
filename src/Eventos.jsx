@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Evento from "./Evento";
+import * as Const from "./Constantes";
 
 const Eventos = () => {
   const [eventos, setEventos] = useState([]);
@@ -7,8 +8,8 @@ const Eventos = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const apikey = window.localStorage.getItem("apikey");
-    const idUsuario = window.localStorage.getItem("idusuario");
+    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
+    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
     if (apikey === "" || idUsuario === "") {
       console.log("falta token o id de usuario");
@@ -17,8 +18,8 @@ const Eventos = () => {
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("apikey", apikey);
-    headers.append("iduser", idUsuario);
+    headers.append(Const.HEADER_API_KEY , apikey);
+    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
 
     const opcionesDeConsulta = {
       method: "GET",
@@ -26,7 +27,7 @@ const Eventos = () => {
     };
 
     fetch(
-      "https://babytracker.develotion.com//eventos.php?idUsuario=49",
+      Const.URL_EVENTOS_GET + "49",
       opcionesDeConsulta
     )
       .then((res) => {

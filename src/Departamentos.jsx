@@ -8,7 +8,7 @@ const Departamentos = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(Const.URL_EVENTOS)
+    fetch(Const.URL_DEPARTAMENTOS)
       .then((res) => {
         if (!res.ok) {
           throw Error("no se pudo obtener datos desde el recurso");

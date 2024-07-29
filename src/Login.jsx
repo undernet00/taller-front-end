@@ -25,7 +25,7 @@ const Login = () => {
     if (usuario !== "" && clave !== "") {
       const opcionesDeConsulta = {
         method: "POST",
-        header: { "Content-Type": "application/json" },
+        header: Const.JSON_HEADER,
         body: JSON.stringify({
           usuario: usuario,
           password: clave,
