@@ -1,10 +1,22 @@
+import * as Const from "./Constantes";
+
 const Evento = (props) => {
+  const urlImagen = () => {
+    return Const.URL_IMAGENES + 1 + ".png";
+  };
   return (
-    <div>
-      <h3>
-        {props.id}, {props.idCategoria}, {props.idUsuario}, {props.detalle}, {props.fecha},
-      </h3>
-    </div>
+    <tr>
+      <td>{props.id}</td>
+      <td>
+        <img src={urlImagen()} />
+      </td>
+      <td>{props.detalle}</td>
+      <td>{props.fecha}</td>
+      <td>
+        {" "}
+        <button>Borrar</button>
+      </td>
+    </tr>
   );
 };
 

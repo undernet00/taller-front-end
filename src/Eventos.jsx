@@ -18,7 +18,7 @@ const Eventos = () => {
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY , apikey);
+    headers.append(Const.HEADER_API_KEY, apikey);
     headers.append(Const.HEADER_ID_USUARIO, idUsuario);
 
     const opcionesDeConsulta = {
@@ -27,7 +27,9 @@ const Eventos = () => {
     };
 
     fetch(
-      Const.URL_EVENTOS_GET + "49",
+      //TODO: Consultar porque solo vuelven los eventos del usuario 49
+      /* Const.URL_EVENTOS_GET + idUsuario, */
+      Const.URL_EVENTOS_GET + 49,
       opcionesDeConsulta
     )
       .then((res) => {
@@ -53,12 +55,20 @@ const Eventos = () => {
     if (eventos !== null) {
       return (
         <div>
-          <div>
-            {eventos.map((evento) => (
-              <Evento key={evento.id} {...evento} />
-            ))}
-          </div>
-          <br></br>
+          <table>
+            <tbody>
+              <tr>
+                <th>Id</th>
+                <th>Categoría</th>
+                <th>Detalle</th>
+                <th>Fecha/Hora</th>
+              </tr>
+
+              {eventos.map((evento) => (
+                <Evento key={evento.id} {...evento} />
+              ))}
+            </tbody>
+          </table>
         </div>
       );
     }
