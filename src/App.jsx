@@ -4,6 +4,7 @@ import Login from "./Login";
 import Menu from "./Menu";
 import Registro from "./Registro";
 import Dashboard from "./Dashboard";
+import EventoFormulario from "./EventoFormulario";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Menu />
       <Login />
       <Registro></Registro>
+<EventoFormulario></EventoFormulario>
 
       <Dashboard />
     </>
