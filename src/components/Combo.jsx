@@ -13,7 +13,6 @@ const Combo = (props) => {
           {item.nombre}{" "}
         </option>
       ))}
-      {/* <option value="apple">Apple</option> */}
     </select>
   );
 };
