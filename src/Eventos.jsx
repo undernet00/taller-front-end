@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
-import Evento from "./Evento";
 import * as Const from "./Constantes";
+import { useEffect } from "react";
+import Evento from "./Evento";
+import { useDispatch, useSelector } from "react-redux";
+import { guardarEventos } from "./features/eventosSlice";
 
 const Eventos = () => {
-  const [eventos, setEventos] = useState([]);
-  const [esperando, setEsperando] = useState(false);
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+
+  const eventos = useSelector((state) => state.eventos.eventos);
 
   useEffect(() => {
     const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
@@ -26,12 +28,7 @@ const Eventos = () => {
       headers: headers,
     };
 
-    fetch(
-      //TODO: Consultar porque solo vuelven los eventos del usuario 49
-      /* Const.URL_EVENTOS_GET + idUsuario, */
-      Const.URL_EVENTOS_GET + 49,
-      opcionesDeConsulta
-    )
+    fetch(Const.URL_EVENTOS_GET + idUsuario, opcionesDeConsulta)
       .then((res) => {
         if (!res.ok) {
           throw Error("no se pudo obtener datos desde el recurso");
@@ -39,40 +36,29 @@ const Eventos = () => {
         return res.json();
       })
       .then((datos) => {
-        setEventos(datos.eventos);
-        setEsperando(false);
-        setError(null);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setEsperando(false);
+        console.log(datos.eventos);
+        dispatch(guardarEventos(datos.eventos));
       });
   }, []);
 
-  if (esperando) {
-    return <p>Esperando datos...</p>;
-  } else {
-    if (eventos !== null) {
-      return (
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <th>Id</th>
-                <th>Categoría</th>
-                <th>Detalle</th>
-                <th>Fecha/Hora</th>
-              </tr>
+  return (
+    <div>
+      <table>
+        <tbody>
+          <tr>
+            <th>Id</th>
+            <th>Categoría</th>
+            <th>Detalle</th>
+            <th>Fecha/Hora</th>
+          </tr>
 
-              {eventos.map((evento) => (
-                <Evento key={evento.id} {...evento} />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-  }
+          {eventos.map((evento) => (
+            <Evento key={evento.id} {...evento} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Eventos;

@@ -1,5 +1,6 @@
 import "./App.css";
-import Eventos from "./Eventos";
+import {Provider} from 'react-redux'
+import {store} from "./store/store"
 import Login from "./Login";
 import Menu from "./Menu";
 import Registro from "./Registro";
@@ -8,14 +9,14 @@ import EventoFormulario from "./EventoFormulario";
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <Menu />
       <Login />
       <Registro></Registro>
 <EventoFormulario></EventoFormulario>
 
       <Dashboard />
-    </>
+    </Provider>
   );
 }
 
