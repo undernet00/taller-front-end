@@ -13,7 +13,7 @@ const Eventos = () => {
     const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
-    if (apikey === "" || idUsuario === "") {
+    if (apikey === null || apikey === "" || idUsuario === "") {
       console.log("falta token o id de usuario");
       return;
     }

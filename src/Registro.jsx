@@ -5,8 +5,10 @@ import Ciudades from "./components/Ciudades";
 import { useSelector } from "react-redux";
 
 const Registro = () => {
-  let campoUsuario = useRef(null);
-  let campoClave = useRef(null);
+  const campoUsuario = useRef(null);
+  const campoClave = useRef(null);
+  /*   let botonGuardar = useRef(null); */
+  const [desactivarBoton, setDesactivarBoton] = useState(true);
 
   const ciudadSeleccionada = useSelector(
     (state) => state.deptociudad.deptociudad.ciudad
@@ -19,24 +21,20 @@ const Registro = () => {
   // Controlar datos del formulario
   // Postear el nuevo usuario
 
-  const esValidoElFormulario = () => {
+  const validarFormulario = () => {
     if (
-      campoUsuario.value === "" ||
-      campoClave.value === "" ||
-      ciudadSeleccionada === 0 ||
-      departamentoSeleccionado === 0
-    )
-      return false;
-
-    return true;
+      campoUsuario.current.value !== "" &&
+      campoClave.current.value !== "" &&
+      ciudadSeleccionada !== 0 &&
+      departamentoSeleccionado !== 0
+    ) {
+      setDesactivarBoton(false);
+    } else {
+      setDesactivarBoton(true);
+    }
   };
 
   const handleGuardar = () => {
-    if (!esValidoElFormulario()) {
-      console.log("El formulario tiene algún error.");
-      return;
-    }
-
     let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
     let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
 
@@ -63,7 +61,10 @@ const Registro = () => {
           return res.json();
         })
         .then((datos) => {
-          window.localStorage.setItem(Const.LOCAL_USUARIO, campoUsuario.current.value);
+          window.localStorage.setItem(
+            Const.LOCAL_USUARIO,
+            campoUsuario.current.value
+          );
           window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
           window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
 
@@ -81,13 +82,13 @@ const Registro = () => {
       <label>
         Usuario:
         <br></br>
-        <input type="text" ref={campoUsuario} />
+        <input type="text" ref={campoUsuario} onChange={validarFormulario} />
       </label>
       <br></br>
       <label>
         Contraseña:
         <br></br>
-        <input type="text" ref={campoClave} />
+        <input type="text" ref={campoClave} onChange={validarFormulario} />
       </label>
       <br></br>
       <label>
@@ -103,7 +104,9 @@ const Registro = () => {
       </label>
       <br></br>
       <br></br>
-      <button onClick={handleGuardar}>Guardar</button>
+      <button onClick={handleGuardar} type="submit" disabled={desactivarBoton}>
+        Guardar
+      </button>
     </div>
   );
 };
