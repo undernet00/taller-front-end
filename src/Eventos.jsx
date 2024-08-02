@@ -36,7 +36,6 @@ const Eventos = () => {
         return res.json();
       })
       .then((datos) => {
-        console.log(datos.eventos);
         dispatch(guardarEventos(datos.eventos));
       });
   }, []);

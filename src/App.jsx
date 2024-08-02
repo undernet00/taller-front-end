@@ -10,7 +10,7 @@ import EventoFormulario from "./EventoFormulario";
 function App() {
   return (
     <Provider store={store}>
-      <Menu />
+      {/* <Menu /> */}
       <Login />
       <Registro></Registro>
 <EventoFormulario></EventoFormulario>

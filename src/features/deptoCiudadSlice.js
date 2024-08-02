@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//Mantiene el estado del Departamento y Ciudad seleccionados en Registro.
 const initialState = {
   deptociudad: {
     departamento: 0,
