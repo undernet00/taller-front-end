@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const Registro = () => {
   const campoUsuario = useRef(null);
   const campoClave = useRef(null);
-  /*   let botonGuardar = useRef(null); */
+
   const [desactivarBoton, setDesactivarBoton] = useState(true);
 
   const ciudadSeleccionada = useSelector(
@@ -35,45 +35,34 @@ const Registro = () => {
   };
 
   const handleGuardar = () => {
-    let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
-    let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
+    const opcionesDeConsulta = {
+      method: "POST",
+      header: Const.JSON_HEADER,
+      body: JSON.stringify({
+        usuario: campoUsuario.current.value,
+        password: campoClave.current.value,
+        idDepartamento: departamentoSeleccionado,
+        idCiudad: ciudadSeleccionada,
+      }),
+    };
 
-    if (usuario !== "" && apikey !== "") {
-      const opcionesDeConsulta = {
-        method: "POST",
-        header: Const.JSON_HEADER,
-        body: JSON.stringify({
-          usuario: campoUsuario.current.value,
-          password: campoClave.current.value,
-          idDepartamento: departamentoSeleccionado,
-          idCiudad: ciudadSeleccionada,
-        }),
-      };
-      console.log(opcionesDeConsulta);
+    fetch(Const.URL_REGISTRO, opcionesDeConsulta)
+      .then((res) => {
+        return res.json();
+      })
+      .then((datos) => {
+        window.localStorage.setItem(
+          Const.LOCAL_USUARIO,
+          campoUsuario.current.value
+        );
+        window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
+        window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
 
-      fetch(Const.URL_REGISTRO, opcionesDeConsulta)
-        .then((res) => {
-          if (!res.ok) {
-            console.log(res);
-            console.log(res.body);
-          }
-
-          return res.json();
-        })
-        .then((datos) => {
-          window.localStorage.setItem(
-            Const.LOCAL_USUARIO,
-            campoUsuario.current.value
-          );
-          window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-          window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
-
-          //TODO: navegar al usuario hacia el dashboard
-        })
-        .catch((err) => {
-          throw Error("no se pudo obtener datos desde el recurso");
-        });
-    }
+        //TODO: navegar al usuario hacia el dashboard
+      })
+      .catch((err) => { //solo errores de red
+        console.log(err);
+      });
   };
 
   return (
@@ -104,7 +93,7 @@ const Registro = () => {
       </label>
       <br></br>
       <br></br>
-      <button onClick={handleGuardar} type="submit" disabled={desactivarBoton}>
+      <button onClick={handleGuardar} disabled={desactivarBoton}>
         Guardar
       </button>
     </div>

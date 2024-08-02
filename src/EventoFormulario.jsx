@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import Combo from "./components/Combo";
+import Categorias from "./components/Categorias";
 const EventoFormulario = () => {
   let campoCategoria = useRef(null);
   let campoFechaHora = useRef(null);
@@ -25,7 +26,7 @@ const EventoFormulario = () => {
       <label>
         Categoría:
         <br></br>
-        <Combo lista={categoriasMock}></Combo>
+        <Categorias/>
       </label>
       <br></br>
       <label>

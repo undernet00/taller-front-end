@@ -23,3 +23,6 @@ export const URL_EVENTOS_GET =
 export const URL_IMAGENES = "https://babytracker.develotion.com/imgs/";
 
 export const URL_REGISTRO = "https://babytracker.develotion.com//usuarios.php";
+
+export const URL_CATEGORIAS =
+  "https://babytracker.develotion.com//categorias.php";

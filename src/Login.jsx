@@ -17,6 +17,7 @@ const Login = () => {
     let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
     let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
 
+    //Inicializa las keys en local storage
     if (usuario === null || apikey === null) {
       window.localStorage.setItem(Const.LOCAL_USUARIO, "");
       window.localStorage.setItem(Const.LOCAL_API_KEY, "");
