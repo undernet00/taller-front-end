@@ -16,19 +16,9 @@ const Ciudades = () => {
   );
 
   useEffect(() => {
-    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
-
-    if (apikey === "" || idUsuario === "") {
-      console.log("falta token o id de usuario");
-      return;
-    }
-
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY, apikey);
-    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
-
+    
     const opcionesDeConsulta = {
       method: "GET",
       headers: headers,

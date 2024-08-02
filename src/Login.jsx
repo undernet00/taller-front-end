@@ -17,6 +17,13 @@ const Login = () => {
     let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
     let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
 
+    if (usuario === null || apikey === null) {
+      window.localStorage.setItem(Const.LOCAL_USUARIO, "");
+      window.localStorage.setItem(Const.LOCAL_API_KEY, "");
+      window.localStorage.setItem(Const.LOCAL_ID_USUARIO, "");
+    }
+
+/*     debugger; */
     setEstaLogueado(usuario !== "" && apikey !== "");
   }, []);
 
@@ -98,7 +105,7 @@ const Login = () => {
         onChange={actualizarEstadoClave}
       />
       <br></br>
-      <button onClick={login} disabled={(usuarioVacio || claveVacio)}>
+      <button onClick={login} disabled={usuarioVacio || claveVacio}>
         Login
       </button>
       <br></br>
