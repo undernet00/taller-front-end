@@ -12,6 +12,9 @@ export const JSON_HEADER = { "Content-Type": "application/json" };
 export const URL_DEPARTAMENTOS =
   "https://babytracker.develotion.com//departamentos.php";
 
+export const URL_CIUDADES =
+  "https://babytracker.develotion.com//ciudades.php?idDepartamento=";
+
 export const URL_LOGIN = "https://babytracker.develotion.com//login.php";
 
 export const URL_EVENTOS_GET =

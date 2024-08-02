@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import * as Const from "./Constantes";
 import Combo from "./components/Combo";
+import Departamentos from "./components/Departamentos";
+import Ciudades from "./components/Ciudades";
 const Registro = () => {
   let campoUsuario = useRef(null);
   let campoClave = useRef(null);
-  let campoDepartamento = useRef(null);
+
   const [departamentos, setDepartamentos] = useState([]);
   const [departamentoSeleccionado, setDepartamentoSeleccionado ] = useState("");
 
@@ -14,26 +16,7 @@ const Registro = () => {
     { id: "2", nombre: "Tarariras" },
   ];
 
-  useEffect(() => {
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
 
-    const opcionesDeConsulta = {
-      method: "GET",
-      headers: headers,
-    };
-
-    fetch(Const.URL_DEPARTAMENTOS , opcionesDeConsulta)
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
-        }
-        return res.json();
-      })
-      .then((datos) => {
-        setDepartamentos(datos.departamentos);
-      });
-  }, []);
 
   return (
     <div>
@@ -53,13 +36,13 @@ const Registro = () => {
       <label>
         Departamento:
         <br></br>
-        <Combo lista={departamentos}></Combo>
+        <Departamentos/>
       </label>
       <br></br>
       <label>
         Ciudad:
         <br></br>
-        <Combo lista={ciudadesMock}></Combo>
+        <Ciudades/>
       </label>
       <br></br>
       <br></br>
