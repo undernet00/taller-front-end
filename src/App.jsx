@@ -1,6 +1,6 @@
 import "./App.css";
-import {Provider} from 'react-redux'
-import {store} from "./store/store"
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import Login from "./Login";
 import Menu from "./Menu";
 import Registro from "./Registro";
@@ -10,10 +10,10 @@ import EventoFormulario from "./EventoFormulario";
 function App() {
   return (
     <Provider store={store}>
-      {/* <Menu /> */}
+      <Menu />
       <Login />
       <Registro></Registro>
-<EventoFormulario></EventoFormulario>
+      <EventoFormulario></EventoFormulario>
 
       <Dashboard />
     </Provider>

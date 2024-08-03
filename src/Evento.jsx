@@ -5,7 +5,6 @@ import { eliminarEvento } from "./features/eventosSlice";
 const Evento = (props) => {
   const dispatch = useDispatch();
   const categorias = useSelector((state) => state.categorias.categorias);
-  const eventos = useSelector((state) => state.eventos.eventos);
 
   const imagenDesdeCategoria = (idCategoriaBuscada) => {
     let categoriaBuscada = categorias.find(
