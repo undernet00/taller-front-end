@@ -22,6 +22,15 @@ const EventoFormulario = () => {
     return fechaHora.toISOString().slice(0, 16);
   };
 
+  const formularioEsValido = () => {
+    //La fecha no puede ser futura
+    let fechaActual = new Date();
+    let fechaCampo = new Date(campoFechaHora.current.value);
+    if (fechaCampo <= fechaActual) return true;
+
+    return false;
+  };
+
   const handleGuardar = () => {
     const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
@@ -31,43 +40,46 @@ const EventoFormulario = () => {
       return;
     }
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY, apikey);
-    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
+    if (formularioEsValido()) {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append(Const.HEADER_API_KEY, apikey);
+      headers.append(Const.HEADER_ID_USUARIO, idUsuario);
 
-    let evento = {
-      id: 0,
-      idCategoria: Number(categoriaSeleccionada),
-      idUsuario: Number(idUsuario),
-      detalle: campoDetalle.current.value,
-      fecha: campoFechaHora.current.value,
-    };
-
-    if (categoriaSeleccionada !== 0 && campoFechaHora.current.value !== "") {
-      const opcionesDeConsulta = {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(evento),
+      let evento = {
+        id: 0,
+        idCategoria: Number(categoriaSeleccionada),
+        idUsuario: Number(idUsuario),
+        detalle: campoDetalle.current.value,
+        fecha: campoFechaHora.current.value,
       };
 
-      fetch(Const.URL_EVENTOS_POST, opcionesDeConsulta)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("no se pudo obtener datos desde el recurso");
-          }
+      if (categoriaSeleccionada !== 0 && campoFechaHora.current.value !== "") {
+        const opcionesDeConsulta = {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(evento),
+        };
 
-          return res.json();
-        })
-        .then((datos) => {
-          evento.id = datos.idEvento;
-          dispatch(agregarEvento(evento));
+        fetch(Const.URL_EVENTOS_POST, opcionesDeConsulta)
+          .then((res) => {
+            if (!res.ok) {
+              throw Error("no se pudo obtener datos desde el recurso");
+            }
 
-          //TODO: navegar al usuario hacia el dashboard
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+            return res.json();
+          })
+          .then((datos) => {
+            evento.id = datos.idEvento;
+            dispatch(agregarEvento(evento));
+
+            //TODO: navegar al usuario hacia el dashboard
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {console.log("Formulario inválido."); //TODO: Enviar este error a un Toast
     }
   };
 
