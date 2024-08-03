@@ -38,8 +38,8 @@ const EventoFormulario = () => {
 
     let evento = {
       id: 0,
-      idCategoria: categoriaSeleccionada,
-      idUsuario: idUsuario,
+      idCategoria: Number(categoriaSeleccionada),
+      idUsuario: Number(idUsuario),
       detalle: campoDetalle.current.value,
       fecha: campoFechaHora.current.value,
     };
