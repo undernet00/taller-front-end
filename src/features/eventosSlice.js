@@ -10,7 +10,7 @@ export const eventosSlice = createSlice({
     guardarEventos: (state, action) => {
       state.eventos = action.payload;
     },
-    agregarEventos: (state, action) => {
+    agregarEvento: (state, action) => {
       state.eventos.push(action.payload);
     },
   },
