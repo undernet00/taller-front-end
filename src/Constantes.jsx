@@ -19,11 +19,12 @@ export const URL_LOGIN = "https://babytracker.develotion.com//login.php";
 
 export const URL_EVENTOS_GET =
   "https://babytracker.develotion.com//eventos.php?idUsuario=";
-  
+
 export const URL_EVENTOS_POST =
   "https://babytracker.develotion.com//eventos.php";
 
-export const URL_EVENTOS_DELETE = "https://babytracker.develotion.com//eventos.php?idEvento=";
+export const URL_EVENTOS_DELETE =
+  "https://babytracker.develotion.com//eventos.php?idEvento=";
 
 export const URL_IMAGENES = "https://babytracker.develotion.com/imgs/";
 
@@ -31,3 +32,7 @@ export const URL_REGISTRO = "https://babytracker.develotion.com//usuarios.php";
 
 export const URL_CATEGORIAS =
   "https://babytracker.develotion.com//categorias.php";
+
+//Categorías
+export const CATEGORIA_PANAL = 33;
+export const CATEGORIA_BIBERON = 35;
