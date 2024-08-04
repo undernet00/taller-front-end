@@ -1,4 +1,3 @@
-import * as Const from "../../Constantes";
 import { useEffect } from "react";
 import Evento from "./Evento";
 import { useDispatch, useSelector } from "react-redux";

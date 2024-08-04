@@ -1,6 +1,5 @@
 import * as Const from "../../Constantes";
 import { useRef, useState, useEffect } from "react";
-import Combo from "../Combo";
 import Categorias from "../Categorias";
 import { useDispatch, useSelector } from "react-redux";
 import { agregarEvento } from "../../features/eventosSlice";
