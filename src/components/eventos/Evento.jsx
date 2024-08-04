@@ -1,22 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as Const from "../../Constantes";
 import { eliminarEvento } from "../../features/eventosSlice";
+import { urlImagenCategoria } from "./EventoUtils";
 
 const Evento = (props) => {
   const dispatch = useDispatch();
   const categorias = useSelector((state) => state.categorias.categorias);
-
-  const imagenDesdeCategoria = (idCategoriaBuscada) => {
-    let categoriaBuscada = categorias.find(
-      (cat) => cat.id === idCategoriaBuscada
-    );
-    if (categoriaBuscada !== undefined) return categoriaBuscada.imagen;
-    return 0;
-  };
-
-  const urlImagen = (idCategoria) => {
-    return Const.URL_IMAGENES + imagenDesdeCategoria(idCategoria) + ".png";
-  };
 
   const handleBorrar = () => {
     const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
@@ -56,7 +45,7 @@ const Evento = (props) => {
     <tr>
       <td>{props.id}</td>
       <td>
-        <img src={urlImagen(props.idCategoria)} />
+        <img src={urlImagenCategoria(props.idCategoria, categorias)} />
       </td>
       <td>{props.detalle}</td>
       <td>{props.fecha}</td>

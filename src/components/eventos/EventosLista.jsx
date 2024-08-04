@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Evento from "./Evento";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarEventos } from "../../features/eventosSlice";
+import { getEventosParticionadosPorTiempo } from "./EventoUtils";
 
 const EventosLista = (props) => {
   const dispatch = useDispatch();
@@ -19,20 +20,9 @@ const EventosLista = (props) => {
             <th>Fecha/Hora</th>
           </tr>
 
-          {eventos
-            .filter((e) => {
-              let hoy = new Date();
-              hoy.setHours(0, 0, 0, 0); //Para abarcar todo el día
-              let fechaEvento = new Date(e.fecha);
-              if (props.actuales) {
-                return fechaEvento >= hoy;
-              } else {
-                return fechaEvento < hoy;
-              }
-            })
-            .map((evento) => (
-              <Evento key={evento.id} {...evento} />
-            ))}
+          {getEventosParticionadosPorTiempo(eventos, props.actuales).map((evento) => (
+            <Evento key={evento.id} {...evento} />
+          ))}
         </tbody>
       </table>
     </div>

@@ -11,11 +11,10 @@ function App() {
   return (
     <Provider store={store}>
       <Menu />
+      <Dashboard />
       <Login />
       <Registro></Registro>
       <EventoFormulario></EventoFormulario>
-
-      <Dashboard />
     </Provider>
   );
 }
