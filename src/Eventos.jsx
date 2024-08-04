@@ -1,13 +1,18 @@
 import * as Const from "./Constantes";
-import { useEffect } from "react";
-import Evento from "./Evento";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarEventos } from "./features/eventosSlice";
+import EventosLista from "./EventosLista";
 
 const Eventos = () => {
   const dispatch = useDispatch();
-
   const eventos = useSelector((state) => state.eventos.eventos);
+
+  const [actualesToggle, setActualesToggle] = useState(true);
+
+  const handleToggle = () => {
+    setActualesToggle(!actualesToggle);
+  };
 
   useEffect(() => {
     const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
@@ -40,22 +45,18 @@ const Eventos = () => {
       });
   }, []);
 
+  let NombreBoton = "";
+  if (actualesToggle){
+    NombreBoton= "Mostrar Anteriores"
+  } else {
+    NombreBoton= "Mostrar Actuales"
+  }
+
   return (
     <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Id</th>
-            <th>Categoría</th>
-            <th>Detalle</th>
-            <th>Fecha/Hora</th>
-          </tr>
-
-          {eventos.map((evento) => (
-            <Evento key={evento.id} {...evento} />
-          ))}
-        </tbody>
-      </table>
+      <button onClick={handleToggle}>{NombreBoton}</button>
+      <br></br>
+      <EventosLista actuales={actualesToggle} />
     </div>
   );
 };
