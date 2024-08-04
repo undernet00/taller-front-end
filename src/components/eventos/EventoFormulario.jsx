@@ -1,9 +1,9 @@
-import * as Const from "./Constantes";
+import * as Const from "../../Constantes";
 import { useRef, useState, useEffect } from "react";
-import Combo from "./components/Combo";
-import Categorias from "./components/Categorias";
+import Combo from "../Combo";
+import Categorias from "../Categorias";
 import { useDispatch, useSelector } from "react-redux";
-import { agregarEvento } from "./features/eventosSlice";
+import { agregarEvento } from "../../features/eventosSlice";
 const EventoFormulario = () => {
   const dispatch = useDispatch();
 

@@ -1,4 +1,4 @@
-import Eventos from "./Eventos";
+import Eventos from "../components/eventos/Eventos";
 
 const Dashboard = () => {
   return (

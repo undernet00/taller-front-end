@@ -1,7 +1,7 @@
-import * as Const from "./Constantes";
+import * as Const from "../../Constantes";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { guardarEventos } from "./features/eventosSlice";
+import { guardarEventos } from "../../features/eventosSlice";
 import EventosLista from "./EventosLista";
 
 const Eventos = () => {

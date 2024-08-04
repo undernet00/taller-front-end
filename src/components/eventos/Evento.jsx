@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import * as Const from "./Constantes";
-import { eliminarEvento } from "./features/eventosSlice";
+import * as Const from "../../Constantes";
+import { eliminarEvento } from "../../features/eventosSlice";
 
 const Evento = (props) => {
   const dispatch = useDispatch();

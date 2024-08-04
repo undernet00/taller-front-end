@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as Const from "./Constantes";
+import * as Const from "../Constantes";
 
 const Menu = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");

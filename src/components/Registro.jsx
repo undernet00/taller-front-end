@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import * as Const from "./Constantes";
-import Departamentos from "./components/Departamentos";
-import Ciudades from "./components/Ciudades";
+import * as Const from "../Constantes";
+import Departamentos from "./Departamentos";
+import Ciudades from "./Ciudades";
 import { useSelector } from "react-redux";
 
 const Registro = () => {

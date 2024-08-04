@@ -1,11 +1,11 @@
 import "./App.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import Login from "./Login";
-import Menu from "./Menu";
-import Registro from "./Registro";
-import Dashboard from "./Dashboard";
-import EventoFormulario from "./EventoFormulario";
+import Login from "./components/Login";
+import Menu from "./components/Menu";
+import Registro from "./components/Registro";
+import Dashboard from "./components/Dashboard";
+import EventoFormulario from "./components/eventos/EventoFormulario";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import * as Const from "./Constantes";
+import * as Const from "../Constantes";
 
 const Login = () => {
   const [error, setError] = useState("");
