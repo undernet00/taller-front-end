@@ -2,6 +2,7 @@ import * as Const from "../Constantes";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarCiudad } from "../features/deptoCiudadSlice";
+import { toast } from "react-toastify";
 
 const Ciudades = () => {
   const [ciudades, setCiudades] = useState([]);
@@ -18,7 +19,7 @@ const Ciudades = () => {
   useEffect(() => {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    
+
     const opcionesDeConsulta = {
       method: "GET",
       headers: headers,
@@ -28,7 +29,7 @@ const Ciudades = () => {
       fetch(Const.URL_CIUDADES + departamentoSeleccionado, opcionesDeConsulta)
         .then((res) => {
           if (!res.ok) {
-            throw Error("no se pudo obtener datos desde el recurso");
+            toast.error(Const.ERROR_CONSULTA_API);
           }
           return res.json();
         })

@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import * as Const from "../Constantes";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const Login = () => {
       fetch(Const.URL_LOGIN, opcionesDeConsulta)
         .then((res) => {
           if (!res.ok) {
+            toast.error(Const.Const.ERROR_CONSULTA_API);
             console.log(res);
           }
 
@@ -47,15 +49,18 @@ const Login = () => {
         .then((datos) => {
           switch (datos.codigo) {
             case 200:
+              toast.success("Login exitoso");
               window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
               window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
               window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
               navigate("/dashboard");
               break;
             case 409:
+              toast.error(Const.ERROR_USUARIO_PASS);
               console.log(datos.mensaje);
               break;
             default:
+              toast.error("Error inesperado.");
               console.log(datos);
           }
         })

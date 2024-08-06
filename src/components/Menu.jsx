@@ -24,7 +24,7 @@ const Menu = () => {
 
   if (nombreUsuario !== "") {
     return (
-      <div className="menu">
+      <div className="menu" >
         <h2>Nav Bar</h2>
         <p>Logueado como {nombreUsuario}.</p>
         <br />

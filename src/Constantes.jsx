@@ -36,3 +36,8 @@ export const URL_CATEGORIAS =
 //Categorías
 export const CATEGORIA_PANAL = 33;
 export const CATEGORIA_BIBERON = 35;
+
+//Mensajes de Error
+export const ERROR_USUARIO_PASS = "Usuario y/o contraseña incorrectos"
+export const ERROR_APIKEY = "Falta ApiKey o Id de usuario"
+export const ERROR_CONSULTA_API = "Error al obtener los datos"

@@ -1,7 +1,11 @@
 import * as Const from "../Constantes";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { guardarCategorias, guardarCategoria } from "../features/categoriasSlice";
+import {
+  guardarCategorias,
+  guardarCategoria,
+} from "../features/categoriasSlice";
+import { toast } from "react-toastify";
 
 const Categorias = () => {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ const Categorias = () => {
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
     if (apikey === null || apikey === "" || idUsuario === "") {
-      console.log("falta token o id de usuario");
+      toast.error(Const.ERROR_APIKEY);
       return;
     }
 
@@ -30,7 +34,7 @@ const Categorias = () => {
     fetch(Const.URL_CATEGORIAS, opcionesDeConsulta)
       .then((res) => {
         if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
+          toast.error(Const.ERROR_CONSULTA_API);
         }
         return res.json();
       })
@@ -44,7 +48,7 @@ const Categorias = () => {
     <>
       <select
         onChange={(e) => {
-           dispatch(guardarCategoria(e.target.value)); 
+          dispatch(guardarCategoria(e.target.value));
         }}
       >
         {categorias.map((item) => (

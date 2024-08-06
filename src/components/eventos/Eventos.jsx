@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarEventos } from "../../features/eventosSlice";
 import EventosLista from "./EventosLista";
+import { toast } from "react-toastify";
 
 const Eventos = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const Eventos = () => {
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
     if (apikey === null || apikey === "" || idUsuario === "") {
-      console.log("falta token o id de usuario");
+      toast.error(Const.ERROR_APIKEY);
+
       return;
     }
 
@@ -36,7 +38,7 @@ const Eventos = () => {
     fetch(Const.URL_EVENTOS_GET + idUsuario, opcionesDeConsulta)
       .then((res) => {
         if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
+          toast.error(Const.ERROR_CONSULTA_API);
         }
         return res.json();
       })
@@ -46,10 +48,10 @@ const Eventos = () => {
   }, []);
 
   let NombreBoton = "";
-  if (actualesToggle){
-    NombreBoton= "Mostrar Anteriores"
+  if (actualesToggle) {
+    NombreBoton = "Mostrar Anteriores";
   } else {
-    NombreBoton= "Mostrar Actuales"
+    NombreBoton = "Mostrar Actuales";
   }
 
   return (

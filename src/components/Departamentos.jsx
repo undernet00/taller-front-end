@@ -2,6 +2,7 @@ import * as Const from "../Constantes";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarDepartamento } from "../features/deptoCiudadSlice";
+import { toast } from "react-toastify";
 
 const Departamentos = () => {
   const [departamentos, setDepartamentos] = useState([]);
@@ -23,7 +24,7 @@ const Departamentos = () => {
     fetch(Const.URL_DEPARTAMENTOS, opcionesDeConsulta)
       .then((res) => {
         if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
+          toast.error(Const.ERROR_CONSULTA_API);
         }
         return res.json();
       })

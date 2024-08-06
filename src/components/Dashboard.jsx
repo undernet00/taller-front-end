@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-
   const navigate = useNavigate();
   useEffect(() => {
     let apiKey = localStorage.getItem(Const.LOCAL_API_KEY);
@@ -20,15 +19,15 @@ const Dashboard = () => {
   }),
     [];
   return (
-    <>
+    <div>
       <Menu />
       <h2>Dashboard</h2>
       <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
       <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
       <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
       <Eventos />
-      <EventoFormulario></EventoFormulario>
-    </>
+      <EventoFormulario />
+    </div>
   );
 };
 

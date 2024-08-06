@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Categorias from "../Categorias";
 import { useDispatch, useSelector } from "react-redux";
 import { agregarEvento } from "../../features/eventosSlice";
+import { toast } from "react-toastify";
 const EventoFormulario = () => {
   const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ const EventoFormulario = () => {
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
     if (apikey === null || apikey === "" || idUsuario === "") {
-      console.log("falta token o id de usuario");
+      toast.error(Const.ERROR_APIKEY);
       return;
     }
 
@@ -63,7 +64,7 @@ const EventoFormulario = () => {
         fetch(Const.URL_EVENTOS_POST, opcionesDeConsulta)
           .then((res) => {
             if (!res.ok) {
-              throw Error("no se pudo obtener datos desde el recurso");
+              toast.error(Const.ERROR_CONSULTA_API);
             }
 
             return res.json();
@@ -71,14 +72,13 @@ const EventoFormulario = () => {
           .then((datos) => {
             evento.id = datos.idEvento;
             dispatch(agregarEvento(evento));
-
-            //TODO: navegar al usuario hacia el dashboard
           })
           .catch((err) => {
             console.log(err);
           });
       }
-    } else {console.log("Formulario inválido."); //TODO: Enviar este error a un Toast
+    } else {
+      toast.error("Los datos en el formulario son inválidos");
     }
   };
 

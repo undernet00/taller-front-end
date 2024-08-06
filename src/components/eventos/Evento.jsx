@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Const from "../../Constantes";
 import { eliminarEvento } from "../../features/eventosSlice";
 import { urlImagenCategoria } from "./EventoUtils";
+import { toast } from "react-toastify";
 
 const Evento = (props) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const Evento = (props) => {
     const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
 
     if (apikey === null || apikey === "" || idUsuario === "") {
-      console.log("falta token o id de usuario");
+      toast.error(Const.ERROR_APIKEY);
       return;
     }
 
@@ -30,7 +31,7 @@ const Evento = (props) => {
     fetch(Const.URL_EVENTOS_DELETE + props.id, opcionesDeConsulta)
       .then((res) => {
         if (!res.ok) {
-          throw Error("no se pudo obtener datos desde el recurso");
+          toast.error(Const.ERROR_CONSULTA_API);
         }
         dispatch(eliminarEvento(props.id));
 
