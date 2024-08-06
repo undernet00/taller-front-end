@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import {
   getEventosParticionadosPorTiempo,
-  tiempoDesdeEventoMasReciente,
+  horasMinutosDesdeEventoMasReciente,
   categoriaPorId,
   urlImagenCategoria,
 } from "./EventoUtils";
@@ -17,7 +17,7 @@ const InformePorTipoEvento = (props) => {
     return e.idCategoria === props.idCategoria;
   });
 
-  const tiempoDesdeUltimoEvento = tiempoDesdeEventoMasReciente(
+  const tiempoDesdeUltimoEvento = horasMinutosDesdeEventoMasReciente(
     eventosDelTipoBuscado
   );
 

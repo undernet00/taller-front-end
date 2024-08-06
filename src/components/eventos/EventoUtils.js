@@ -1,4 +1,4 @@
-import * as Const from "../../Constantes"
+import * as Const from "../../Constantes";
 export const categoriaPorId = (idCategoriaBuscada, categorias) => {
   let categoriaBuscada = categorias.find(
     (cat) => cat.id === idCategoriaBuscada
@@ -17,9 +17,13 @@ const imagenDesdeCategoria = (idCategoriaBuscada, categorias) => {
 };
 
 export const urlImagenCategoria = (idCategoria, categorias) => {
-  return Const.URL_IMAGENES + imagenDesdeCategoria(idCategoria, categorias) + ".png";
+  return (
+    Const.URL_IMAGENES + imagenDesdeCategoria(idCategoria, categorias) + ".png"
+  );
 };
 
+//Devuelve los eventos del día si deHoy===true
+//Devuelve los eventos anteriores al día de hoy si deHoy===false
 export const getEventosParticionadosPorTiempo = (eventos, deHoy) => {
   return eventos.filter((e) => {
     let hoy = new Date();
@@ -33,20 +37,19 @@ export const getEventosParticionadosPorTiempo = (eventos, deHoy) => {
   });
 };
 
-export const tiempoDesdeEventoMasReciente = (eventos) => {
+//Retorna un string con la cantidad de HH:mm desde el último evento de la lista.
+export const horasMinutosDesdeEventoMasReciente = (eventos) => {
   if (eventos.length === 0) {
     return "N/A";
   } else {
     let ahora = new Date();
 
-    let eventosPorFechaDecreciente =
-      ordenarEventosPorTiempoDecreciente(eventos);
-
-    let fechaEvento = new Date(eventosPorFechaDecreciente[0].fecha); //El último por fecha/hora
+    let fechaEvento = fechaHoraUltimoEvento(eventos); //El último por fecha/hora
 
     return diferenciaHoras(ahora, fechaEvento);
   }
 };
+
 const ordenarEventosPorTiempoDecreciente = (eventos) => {
   let eventosOrdenados = [...eventos].sort((a, b) => {
     let evento1 = new Date(a.fecha);
@@ -64,12 +67,26 @@ const diferenciaHoras = (date1, date2) => {
   let diff = Math.abs(date2 - date1);
 
   // Convierte la diferencia a horas y minutos
-  let hours = Math.floor(diff / (1000 * 60 * 60));
-  let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let { horas, minutos } = milisegundosAHorasMinutos(diff);
 
   // Formatea las horas y minutos en HH:mm
-  let formattedHours = String(hours).padStart(2, "0");
-  let formattedMinutes = String(minutes).padStart(2, "0");
-
-  return `${formattedHours}:${formattedMinutes}`;
+  let horasFormateadas = String(horas).padStart(2, "0");
+  let minutosFormateados = String(minutos).padStart(2, "0");
+  return `${horasFormateadas}:${minutosFormateados}`;
 };
+
+export const milisegundosAHorasMinutos = (tiempoEnMilisegundos) => {
+  let horas = Math.floor(tiempoEnMilisegundos / (1000 * 60 * 60));
+  let minutos = Math.floor(
+    (tiempoEnMilisegundos % (1000 * 60 * 60)) / (1000 * 60)
+  );
+
+  return { horas, minutos };
+};
+export function fechaHoraUltimoEvento(eventos) {
+  let eventosPorFechaDecreciente = ordenarEventosPorTiempoDecreciente(eventos);
+
+  let fechaEvento = new Date(eventosPorFechaDecreciente[0].fecha); //El último por fecha/hora
+  return fechaEvento;
+}
+

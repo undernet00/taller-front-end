@@ -36,3 +36,6 @@ export const URL_CATEGORIAS =
 //Categorías
 export const CATEGORIA_PANAL = 33;
 export const CATEGORIA_BIBERON = 35;
+
+//Tiempo
+export const CUATRO_HORAS_EN_MILISEGUNDOS = 1.44e+7;
