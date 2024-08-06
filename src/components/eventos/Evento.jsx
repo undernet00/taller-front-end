@@ -51,7 +51,7 @@ const Evento = (props) => {
       <td>{props.detalle}</td>
       <td>{props.fecha}</td>
       <td>
-        <button onClick={handleBorrar}>Borrar</button>
+        <button onClick={handleBorrar} className="btn btn-primary btn-sm">Borrar</button>
       </td>
     </tr>
   );

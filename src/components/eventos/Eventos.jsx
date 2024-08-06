@@ -55,8 +55,8 @@ const Eventos = () => {
   }
 
   return (
-    <div>
-      <button onClick={handleToggle}>{NombreBoton}</button>
+    <div className="col">
+      <button onClick={handleToggle} className="btn btn-primary btn-sm">{NombreBoton}</button>
       <br></br>
       <EventosLista actuales={actualesToggle} />
     </div>

@@ -19,14 +19,31 @@ const Dashboard = () => {
   }),
     [];
   return (
-    <div>
-      <Menu />
-      <h2>Dashboard</h2>
-      <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
-      <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
-      <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
-      <Eventos />
-      <EventoFormulario />
+    <div className="container">
+      <div className="row">
+        <Menu />
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <Eventos />
+        </div>
+        <div className="col">
+          <EventoFormulario />
+        </div>
+      </div>
+      <div className="col">
+        <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
+        </div>
+        <div className="col">
+          <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
+        </div>
+      </div>
     </div>
   );
 };

@@ -24,16 +24,26 @@ const Menu = () => {
 
   if (nombreUsuario !== "") {
     return (
-      <div className="menu" >
-        <h2>Nav Bar</h2>
-        <p>Logueado como {nombreUsuario}.</p>
-        <br />
-        <button onClick={handleLogout}>Logout</button>
+      <div className="col">
+        <div className="row">
+          <h2>Dashboard</h2>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>Logueado como {nombreUsuario}.</label>
+          </div>
+          <div className="col">
+            <button className="btn btn-link" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
       </div>
     );
   } else {
     return (
       <div>
+        <h2>Dashboard</h2>
         <p>Debe iniciar sesión.</p>
       </div>
     );

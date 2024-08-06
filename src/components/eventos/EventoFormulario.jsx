@@ -83,8 +83,8 @@ const EventoFormulario = () => {
   };
 
   return (
-    <div>
-      <h2>Nuevo Evento</h2>
+    <>
+      <h3>Nuevo Evento</h3>
 
       <label>
         Categoría:
@@ -110,8 +110,8 @@ const EventoFormulario = () => {
       <br></br>
 
       <br></br>
-      <button onClick={handleGuardar}>Guardar</button>
-    </div>
+      <button onClick={handleGuardar} className="btn btn-primary btn-sm">Guardar</button>
+    </>
   );
 };
 
