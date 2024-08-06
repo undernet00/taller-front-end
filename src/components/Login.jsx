@@ -1,10 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import * as Const from "../Constantes";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [error, setError] = useState("");
-  const [esperando, setEsperando] = useState("");
-  const [estaLogueado, setEstaLogueado] = useState(false);
+  const navigate = useNavigate();
   const [usuarioVacio, setUsuarioVacio] = useState(true);
   const [claveVacio, setClaveVacio] = useState(true);
 
@@ -15,15 +14,12 @@ const Login = () => {
     let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
     let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
 
-    //Inicializa las keys en local storage
+    //Inicializa las keys en local storage si no hay datos
     if (usuario === null || apikey === null) {
       window.localStorage.setItem(Const.LOCAL_USUARIO, "");
       window.localStorage.setItem(Const.LOCAL_API_KEY, "");
       window.localStorage.setItem(Const.LOCAL_ID_USUARIO, "");
     }
-
-    /*     debugger; */
-    setEstaLogueado(usuario !== "" && apikey !== "");
   }, []);
 
   const login = () => {
@@ -43,27 +39,27 @@ const Login = () => {
       fetch(Const.URL_LOGIN, opcionesDeConsulta)
         .then((res) => {
           if (!res.ok) {
-            throw Error("no se pudo obtener datos desde el recurso");
+            console.log(res);
           }
 
           return res.json();
         })
         .then((datos) => {
-          window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
-          window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-          window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
-
-          setEsperando(false);
-          setError(null);
-          setEstaLogueado(true);
-
-          //TODO: navegar al usuario hacia el dashboard
+          switch (datos.codigo) {
+            case 200:
+              window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
+              window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
+              window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
+              navigate("/dashboard");
+              break;
+            case 409:
+              console.log(datos.mensaje);
+              break;
+            default:
+              console.log(datos);
+          }
         })
-        .catch((err) => {
-          setError(err.message);
-          setEsperando(false);
-          setEstaLogueado(false);
-        });
+        .catch((err) => {});
     }
   };
 
@@ -74,13 +70,6 @@ const Login = () => {
     setClaveVacio(e.target.value === "");
   };
 
-  if (estaLogueado) {
-    return (
-      <div>
-        <p>Sesión iniciada.</p>
-      </div>
-    );
-  }
   return (
     <div>
       <h2>Login</h2>
