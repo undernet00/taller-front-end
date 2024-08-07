@@ -76,7 +76,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="card">
       <h2>Login</h2>
       <label htmlFor="user">Usuario</label>
       <br></br>

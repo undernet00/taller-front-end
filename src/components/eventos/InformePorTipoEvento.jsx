@@ -24,9 +24,14 @@ const InformePorTipoEvento = (props) => {
   const categoria = categoriaPorId(props.idCategoria, categorias);
 
   return (
-    <div className="col">
+    <div className="card informe">
       <h3>Informe de {categoria.tipo}</h3>
-      <img src={urlImagenCategoria(props.idCategoria, categorias)} />
+      <div>
+        <img
+          src={urlImagenCategoria(props.idCategoria, categorias)}
+          className="icono"
+        />
+      </div>
       <br />
       <p>Total de eventos en el día: {eventosDelTipoBuscado.length}</p>
 

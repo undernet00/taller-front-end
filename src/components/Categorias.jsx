@@ -47,6 +47,7 @@ const Categorias = () => {
   return (
     <>
       <select
+        className="bg-light text-black"
         onChange={(e) => {
           dispatch(guardarCategoria(e.target.value));
         }}

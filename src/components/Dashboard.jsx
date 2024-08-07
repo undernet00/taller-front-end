@@ -20,28 +20,36 @@ const Dashboard = () => {
     [];
   return (
     <div className="container">
-      <div className="row">
+      <div>
         <Menu />
       </div>
-
       <div className="row">
         <div className="col">
-          <Eventos />
+          <div className="div-obli">
+            <Eventos />
+          </div>
+          <div className="div-obli">
+            <EventoFormulario />
+          </div>
         </div>
         <div className="col">
-          <EventoFormulario />
-        </div>
-      </div>
-      <div className="col">
-        <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
-      </div>
-
-      <div className="row">
-        <div className="col">
-          <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
-        </div>
-        <div className="col">
-          <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
+          <div className="row">
+            <div className="div-obli">
+              <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <div className="div-obli">
+                <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
+              </div>
+            </div>
+            <div className="col">
+              <div className="div-obli">
+                <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

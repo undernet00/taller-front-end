@@ -55,10 +55,13 @@ const Eventos = () => {
   }
 
   return (
-    <div className="col">
-      <button onClick={handleToggle} className="btn btn-primary btn-sm">{NombreBoton}</button>
-      <br></br>
+    <div className="col panel panel-default card listado">
       <EventosLista actuales={actualesToggle} />
+      <div>
+        <button onClick={handleToggle} className="btn-primary btn btn-sm">
+          {NombreBoton}
+        </button>
+      </div>
     </div>
   );
 };

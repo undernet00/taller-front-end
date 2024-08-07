@@ -83,35 +83,48 @@ const EventoFormulario = () => {
   };
 
   return (
-    <>
-      <h3>Nuevo Evento</h3>
+    <div className="card formulario">
+      <div className="row">
+        <div className="col">
+          <label>
+            Categoría:
+            <br></br>
+            <Categorias />
+          </label>
+        </div>
 
-      <label>
-        Categoría:
-        <br></br>
-        <Categorias />
-      </label>
-      <br></br>
-      <label>
-        Fecha/Hora:
-        <br></br>
-        <input
-          type="datetime-local"
-          ref={campoFechaHora}
-          defaultValue={fechaHoraActual()}
-        />
-      </label>
-      <br></br>
-      <label>
-        Detalle:
-        <br></br>
-        <textarea ref={campoDetalle} />
-      </label>
-      <br></br>
+        <div className="col">
+          <label>
+            Fecha/Hora:
+            <br></br>
+            <input
+              type="datetime-local"
+              className=""
+              ref={campoFechaHora}
+              defaultValue={fechaHoraActual()}
+            />
+          </label>
+        </div>
+      </div>
 
-      <br></br>
-      <button onClick={handleGuardar} className="btn btn-primary btn-sm">Guardar</button>
-    </>
+      <div className="row">
+        <label>
+          Detalle:
+          <br></br>
+          <textarea
+            className="form-control form-control-lg"
+            ref={campoDetalle}
+          />
+        </label>
+      </div>
+
+      <div>
+        <br />
+        <button onClick={handleGuardar} className="btn btn-primary btn-sm">
+          Guardar
+        </button>
+      </div>
+    </div>
   );
 };
 
