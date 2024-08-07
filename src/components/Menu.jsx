@@ -24,7 +24,7 @@ const Menu = () => {
 
   if (nombreUsuario !== "") {
     return (
-      <div className="col">
+      <div className="col card">
         <div className="row">
           <h2>Dashboard</h2>
         </div>

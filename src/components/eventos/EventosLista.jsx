@@ -10,7 +10,7 @@ const EventosLista = (props) => {
   const eventos = useSelector((state) => state.eventos.eventos);
 
   return (
-    <div>
+    <>
       <table>
         <tbody>
           <tr>
@@ -25,7 +25,7 @@ const EventosLista = (props) => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

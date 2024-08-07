@@ -55,7 +55,7 @@ const Eventos = () => {
   }
 
   return (
-    <div className="col panel panel-default card listado">
+    <div className="card listado">
       <EventosLista actuales={actualesToggle} />
       <div>
         <button onClick={handleToggle} className="btn-primary btn btn-sm">

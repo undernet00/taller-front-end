@@ -43,17 +43,21 @@ const Evento = (props) => {
   };
 
   return (
-    <tr>
-      <td>{props.id}</td>
-      <td>
-        <img src={urlImagenCategoria(props.idCategoria, categorias)} />
-      </td>
-      <td>{props.detalle}</td>
-      <td>{props.fecha}</td>
-      <td>
-        <button onClick={handleBorrar} className="btn btn-primary btn-sm">Borrar</button>
-      </td>
-    </tr>
+    <>
+      <tr>
+        <td>{props.id}</td>
+        <td>
+          <img src={urlImagenCategoria(props.idCategoria, categorias)} />
+        </td>
+        <td>{props.detalle}</td>
+        <td>{props.fecha}</td>
+        <td>
+          <button onClick={handleBorrar} className="btn btn-primary btn-sm">
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </>
   );
 };
 
