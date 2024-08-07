@@ -34,11 +34,6 @@ const Dashboard = () => {
         </div>
         <div className="col">
           <div className="row">
-            <div className="div-obli">
-              <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
-            </div>
-          </div>
-          <div className="row">
             <div className="col">
               <div className="div-obli">
                 <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
@@ -48,6 +43,11 @@ const Dashboard = () => {
               <div className="div-obli">
                 <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="div-obli">
+              <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
             </div>
           </div>
         </div>

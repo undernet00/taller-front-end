@@ -93,6 +93,7 @@ const Registro = () => {
         <input type="text" ref={campoClave} onChange={validarFormulario} />
       </label>
       <br></br>
+      
       <label>
         Departamento:
         <br></br>

@@ -74,6 +74,12 @@
   align-items: flex;
 }
 
+.card.registro {
+  width: 100%;
+  align-items: flex;
+  padding: 25px;
+}
+
 .card.contador {
   width: 100%;
   align-items: flex;

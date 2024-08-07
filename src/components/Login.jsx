@@ -98,7 +98,7 @@ const Login = () => {
         Contraseña:
         <br />
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           ref={campoClave}
