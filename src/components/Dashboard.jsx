@@ -4,8 +4,14 @@ import * as Const from "../Constantes";
 import EventoContadorHoras from "./eventos/EventoContadorHoras";
 import Menu from "./Menu";
 import EventoFormulario from "./eventos/EventoFormulario";
+import Grafica from "./grafica/Grafica";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+const datos = {
+  etiquetas: ["Biberón", "Pañales", "Paseo"],
+  valores: [2, 3, 11],
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -50,6 +56,22 @@ const Dashboard = () => {
               <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Grafica
+            titulo="Listado de Eventos"
+            datos={datos}
+            color="rgba(0, 99, 132, 0.5)"
+          />
+        </div>
+        <div className="col">
+          <Grafica
+            titulo="Listado de Eventos"
+            datos={datos}
+            color="rgba(0, 99, 132, 0.5)"
+          />
         </div>
       </div>
     </div>
