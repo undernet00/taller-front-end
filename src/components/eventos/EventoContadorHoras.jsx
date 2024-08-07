@@ -21,7 +21,7 @@ const EventoContadorHoras = (props) => {
 
   return (
     <div className="card contador">
-      <h3>Contador de Horas desde evento {"Biberón"}</h3>
+      <h4>Contador de Horas desde evento {"Biberón"}</h4>
       <p style={estiloLetra}>Tiempo desde el último evento: {tiempoDesdeUltimoEvento}</p>
     </div>
   );

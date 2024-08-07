@@ -45,31 +45,18 @@
   height: 50px;
 }
 
-.btn-obli {
-  background-color: #d3e3fe;
-  border: 2px solid black;
-}
-
-.btn-obli:hover {
-  background-color:#FDE4C4;
-  transition: 0.7s;
-  border: 2px solid black;
-}
-
 .div-obli {
-  margin: 10px;
-  width:auto;
+  width: auto;
   margin-top: 10px;
   margin-bottom: 0px;
-  margin-left: 10px;
-  margin-right: 10px;
-  
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .card {
-  padding: 1em;
+  padding: 10px;
   background-color: bisque;
-  width: 50%;
+  width: 100%;
 }
 
 .card.informe {
@@ -79,16 +66,33 @@
 
 .card.listado {
   width: 100%;
-  align-items: flex;
+  align-items: center;
 }
-
 
 .card.formulario {
   width: 100%;
-  align-items:flex;
+  align-items: flex;
 }
 
 .card.contador {
   width: 100%;
-  align-items:flex;
+  align-items: flex;
+}
+
+.text-obli {
+  resize: none;
+}
+
+.a-obli {
+  text-decoration: none;
+}
+
+.align-left-obli {
+  text-align: left;
+}
+.align-right-obli {
+  text-align: right;
+}
+.align-center-obli {
+  text-align: center;
 }

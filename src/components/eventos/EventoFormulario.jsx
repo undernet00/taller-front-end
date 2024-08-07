@@ -72,6 +72,7 @@ const EventoFormulario = () => {
           .then((datos) => {
             evento.id = datos.idEvento;
             dispatch(agregarEvento(evento));
+            campoDetalle.current.value = "";
           })
           .catch((err) => {
             console.log(err);
@@ -112,7 +113,7 @@ const EventoFormulario = () => {
           Detalle:
           <br></br>
           <textarea
-            className="form-control form-control-lg"
+            className="form-control form-control-lg text-obli"
             ref={campoDetalle}
           />
         </label>

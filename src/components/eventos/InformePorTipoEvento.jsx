@@ -25,7 +25,7 @@ const InformePorTipoEvento = (props) => {
 
   return (
     <div className="card informe">
-      <h3>Informe de {categoria.tipo}</h3>
+      <h4>Informe de {categoria.tipo}</h4>
       <div>
         <img
           src={urlImagenCategoria(props.idCategoria, categorias)}

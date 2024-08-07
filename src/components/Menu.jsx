@@ -29,13 +29,13 @@ const Menu = () => {
           <h2>Dashboard</h2>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col align-left-obli">
             <label>Logueado como {nombreUsuario}.</label>
           </div>
-          <div className="col">
-            <button className="btn btn-link" onClick={handleLogout}>
+          <div className="col align-right-obli">
+            <a className="a-obli" onClick={handleLogout}>
               Logout
-            </button>
+            </a>
           </div>
         </div>
       </div>
