@@ -22,7 +22,7 @@ const Evento = (props) => {
     headers.append(Const.HEADER_API_KEY, apikey);
     headers.append(Const.HEADER_ID_USUARIO, idUsuario);
 
-    //TODO: Preguntar al usuario antes de eliminar
+    //TODO: NTH Preguntar al usuario antes de eliminar
     const opcionesDeConsulta = {
       method: "DELETE",
       headers: headers,

@@ -64,7 +64,11 @@ const Login = () => {
               console.log(datos);
           }
         })
-        .catch((err) => {});
+        .catch((err) => {
+          //solo errores de red
+          toast.error("Error de comunicación.");
+          console.log(datos);
+        });
     }
   };
 
@@ -77,32 +81,49 @@ const Login = () => {
 
   return (
     <div className="card">
-      <h2>Login</h2>
-      <label htmlFor="user">Usuario</label>
+      <h2>Mi Bebé</h2>
+      <label>
+        Usuario:
+        <br />
+        <input
+          type="text"
+          id="user"
+          name="user"
+          ref={campoUsuario}
+          onChange={actualizarEstadoUsuario}
+        />
+      </label>
+
+      <label>
+        Contraseña:
+        <br />
+        <input
+          type="text"
+          id="password"
+          name="password"
+          ref={campoClave}
+          onChange={actualizarEstadoClave}
+        />
+      </label>
       <br></br>
-      <input
-        type="text"
-        id="user"
-        name="user"
-        ref={campoUsuario}
-        onChange={actualizarEstadoUsuario}
-      />
+      <div>
+        <button
+          className="btn btn-primary"
+          onClick={login}
+          disabled={usuarioVacio || claveVacio}
+        >
+          Login
+        </button>
+      </div>
       <br></br>
-      <label htmlFor="password">Contraseña</label>
-      <br></br>
-      <input
-        type="text"
-        id="password"
-        name="password"
-        ref={campoClave}
-        onChange={actualizarEstadoClave}
-      />
-      <br></br>
-      <button onClick={login} disabled={usuarioVacio || claveVacio}>
-        Login
-      </button>
-      <br></br>
-      <a>¿Nuevo en el sistema? Regístrate aquí</a>
+      <a
+        className="a-obli"
+        onClick={() => {
+          navigate("/registro");
+        }}
+      >
+        ¿Nuevo en el sistema? Regístrate aquí
+      </a>
 
       <br></br>
     </div>

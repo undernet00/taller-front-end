@@ -3,11 +3,14 @@ import * as Const from "../Constantes";
 import Departamentos from "./Departamentos";
 import Ciudades from "./Ciudades";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Registro = () => {
   const campoUsuario = useRef(null);
   const campoClave = useRef(null);
 
+  const navigate = useNavigate();
   const [desactivarBoton, setDesactivarBoton] = useState(true);
 
   const ciudadSeleccionada = useSelector(
@@ -51,22 +54,32 @@ const Registro = () => {
         return res.json();
       })
       .then((datos) => {
-        window.localStorage.setItem(
-          Const.LOCAL_USUARIO,
-          campoUsuario.current.value
-        );
-        window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-        window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
+        switch (datos.codigo) {
+          case 200:
+            window.localStorage.setItem(
+              Const.LOCAL_USUARIO,
+              campoUsuario.current.value
+            );
+            window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
+            window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
 
-        //TODO: navegar al usuario hacia el dashboard
+            toast.success("Registro exitoso");
+            navigate("/dashboard");
+            break;
+          default:
+            toast.error("Error inesperado.");
+            console.log();
+        }
       })
-      .catch((err) => { //solo errores de red
+      .catch((err) => {
+        //solo errores de red
+        toast.error("Error de comunicación.");
         console.log(err);
       });
   };
 
   return (
-    <div>
+    <div className="card formulario">
       <h2>Registro</h2>
       <label>
         Usuario:
@@ -93,7 +106,11 @@ const Registro = () => {
       </label>
       <br></br>
       <br></br>
-      <button onClick={handleGuardar} disabled={desactivarBoton}>
+      <button
+        className="btn btn-primary"
+        onClick={handleGuardar}
+        disabled={desactivarBoton}
+      >
         Guardar
       </button>
     </div>
