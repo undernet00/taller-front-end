@@ -36,6 +36,7 @@ export const URL_CATEGORIAS =
 //Categorías
 export const CATEGORIA_PANAL = 33;
 export const CATEGORIA_BIBERON = 35;
+export const CATEGORIA_COMIDA = 31;
 
 //Mensajes de Error
 export const ERROR_USUARIO_PASS = "Usuario y/o contraseña incorrectos"

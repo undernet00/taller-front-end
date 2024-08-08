@@ -27,18 +27,20 @@ export const options = {
     },
     title: {
       display: true,
-      text: "", 
+      text: "",
     },
   },
 };
 
 const Grafica = (props) => {
+  let titulo = props.titulo;
   useEffect(() => {
-    options.plugins.title.text = props.titulo;
+    options.plugins.title.text = titulo;
   }, []);
+
+
   return (
     <div>
-      {" "}
       <Bar
         options={options}
         data={{

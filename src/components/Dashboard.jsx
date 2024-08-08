@@ -4,17 +4,33 @@ import * as Const from "../Constantes";
 import EventoContadorHoras from "./eventos/EventoContadorHoras";
 import Menu from "./Menu";
 import EventoFormulario from "./eventos/EventoFormulario";
-import Grafica from "./grafica/Grafica";
-import { useEffect } from "react";
+import Grafica from "./graficas/Grafica";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  ListadoEventosPorCategoria,
+  ListadoComidasSemana,
+} from "./graficas/Listados";
 
-const datos = {
-  etiquetas: ["Biberón", "Pañales", "Paseo"],
-  valores: [2, 3, 11],
+const datos2 = {
+  etiquetas: ["Lunes", "Martes", "Miércoles"],
+  valores: [5, 2, 1],
 };
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const eventos = useSelector((state) => state.eventos.eventos);
+  const categorias = useSelector((state) => state.categorias.categorias);
+  const [eventosPorCategoria, setEventosPorCategoria] = useState({
+    etiquetas: [],
+    valores: [],
+  });
+  const [comidasDeLaSemana, setComidasDeLaSemana] = useState({
+    etiquetas: [],
+    valores: [],
+  });
+
   useEffect(() => {
     let apiKey = localStorage.getItem(Const.LOCAL_API_KEY);
 
@@ -24,6 +40,12 @@ const Dashboard = () => {
     }
   }),
     [];
+
+  useEffect(() => {
+    setEventosPorCategoria(ListadoEventosPorCategoria(eventos, categorias));
+    setComidasDeLaSemana(ListadoComidasSemana(eventos));
+  }, [eventos]);
+
   return (
     <div className="container">
       <div>
@@ -62,15 +84,15 @@ const Dashboard = () => {
         <div className="col">
           <Grafica
             titulo="Listado de Eventos"
-            datos={datos}
+            datos={eventosPorCategoria}
             color="rgba(0, 99, 132, 0.5)"
           />
         </div>
         <div className="col">
           <Grafica
-            titulo="Listado de Eventos"
-            datos={datos}
-            color="rgba(0, 99, 132, 0.5)"
+            titulo="Comidas Semana"
+            datos={comidasDeLaSemana}
+            color="rgba(150, 99, 132, 0.5)"
           />
         </div>
       </div>

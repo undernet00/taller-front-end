@@ -60,6 +60,16 @@ const ordenarEventosPorTiempoDecreciente = (eventos) => {
   return eventosOrdenados;
 };
 
+export const ordenarEventosPorTiempoAscendente = (eventos) => {
+  let eventosOrdenados = [...eventos].sort((a, b) => {
+    let evento1 = new Date(a.fecha);
+    let evento2 = new Date(b.fecha);
+
+    return evento1 - evento2;
+  });
+  return eventosOrdenados;
+};
+
 const diferenciaHoras = (date1, date2) => {
   //Se usó ChatGPT con el siguiente prompt: "En java script. ¿Cómo puedo obtener una cadena de texto con las horas y minutos con el formato HH:mm con la diferencia entre dos objetos Date?"
 
