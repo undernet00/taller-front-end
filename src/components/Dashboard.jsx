@@ -13,11 +13,6 @@ import {
   ListadoComidasSemana,
 } from "./graficas/Listados";
 
-const datos2 = {
-  etiquetas: ["Lunes", "Martes", "Miércoles"],
-  valores: [5, 2, 1],
-};
-
 const Dashboard = () => {
   const navigate = useNavigate();
   const eventos = useSelector((state) => state.eventos.eventos);

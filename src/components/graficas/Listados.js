@@ -30,52 +30,54 @@ export const ListadoEventosPorCategoria = (eventos, categorias) => {
 };
 
 export const ListadoComidasSemana = (eventos) => {
-  let ahora = new Date();
-
-  //Resto 7 días
-  let desde = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
-
-  let comidasUltimaSemana = eventos.filter(
-    (e) =>
-      new Date(e.fecha) >= desde && e.idCategoria === Const.CATEGORIA_COMIDA
-  );
-
-  let comidasUltimaSemanaOrdenada =
-    ordenarEventosPorTiempoAscendente(comidasUltimaSemana);
-
   let respuesta = {
     etiquetas: [],
     valores: [],
   };
 
-  let dias = comidasUltimaSemanaOrdenada.map((c) => new Date(c.fecha).getDay());
-  let diaInicio = dias[0];
-  let diaFinal = dias[dias.length - 1];
+  if (eventos.length > 0) {
+    let ahora = new Date();
 
-  let diasSinDuplicado = removewithfilter(dias);
+    //Resto 7 días
+    let desde = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-/*   console.log(diasSemana.get(diaInicio), diasSemana.get(diaFinal));
-  console.log(diaInicio, diaFinal); */
-  // Domingo -> Sábado : 0 -> 6
-  for (let i = 0; i <= diasSinDuplicado.length - 1; i++) {
-    let cantidadDelDia = comidasUltimaSemana.filter(
-      (c) => new Date(c.fecha).getDay() === diasSinDuplicado[i]
-    ).length;
-    if (cantidadDelDia > 0) {
-      respuesta.etiquetas.push(diasSemana.get(diasSinDuplicado[i]));
+    let comidasUltimaSemana = eventos.filter(
+      (e) =>
+        new Date(e.fecha) >= desde && e.idCategoria === Const.CATEGORIA_COMIDA
+    );
+
+    let comidasUltimaSemanaOrdenada =
+      ordenarEventosPorTiempoAscendente(comidasUltimaSemana);
+
+    let diaInicio = comidasUltimaSemanaOrdenada.map((c) =>
+      new Date(c.fecha).getDay()
+    )[0];
+
+    let diasDeLaUltimaSemana = arrayDeDias(diaInicio);
+
+    // Domingo -> Sábado : 0 -> 6
+    for (let i = 0; i <= diasDeLaUltimaSemana.length - 1; i++) {
+      let cantidadDelDia = comidasUltimaSemana.filter(
+        (c) => new Date(c.fecha).getDay() === diasDeLaUltimaSemana[i]
+      ).length;
+
+      respuesta.etiquetas.push(diasSemana.get(diasDeLaUltimaSemana[i]));
       respuesta.valores.push(cantidadDelDia);
     }
   }
-
   return respuesta;
 };
 
-function removewithfilter(arr) {
-  let outputArray = arr.filter((item, index, self) => {
-    // It returns the index of the first
-    // instance of each value
-    return index == self.indexOf(item);
-  });
-
-  return outputArray;
-}
+//Retorna una lista de días de la semana consecutivos que comienza en el día especificado
+//Ej: [6,0,1,2,3,4,5] Comienza en sábado, tiene 7 días y termina en viernes.
+const arrayDeDias = (inicial) => {
+  let respuesta = [];
+  if (inicial !== undefined && inicial < 7) {
+    respuesta.push(inicial);
+    do {
+      let siguiente = respuesta[respuesta.length - 1] + 1;
+      siguiente !== 7 ? respuesta.push(siguiente) : respuesta.push(0);
+    } while (respuesta.length < 7);
+  }
+  return respuesta;
+};

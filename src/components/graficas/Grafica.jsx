@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -33,11 +33,9 @@ export const options = {
 };
 
 const Grafica = (props) => {
-  let titulo = props.titulo;
   useEffect(() => {
-    options.plugins.title.text = titulo;
+    options.plugins.title.text = props.titulo;
   }, []);
-
 
   return (
     <div className="card">
