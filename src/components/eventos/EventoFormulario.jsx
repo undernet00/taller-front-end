@@ -120,7 +120,6 @@ const EventoFormulario = () => {
       </div>
 
       <div>
-        <br />
         <button onClick={handleGuardar} className="btn btn-primary btn-sm">
           Guardar
         </button>

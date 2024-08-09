@@ -46,7 +46,7 @@
 }
 
 .div-obli {
-  width: auto;
+  width: 100%;
   margin-top: 10px;
   margin-bottom: 0px;
   margin-left: 0px;
@@ -54,9 +54,12 @@
 }
 
 .card {
+  margin-bottom: 10px;
+  margin-top: 10px;
   padding: 10px;
   background-color: bisque;
   width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card.informe {
@@ -72,6 +75,7 @@
 .card.formulario {
   width: 100%;
   align-items: flex;
+  
 }
 
 .card.registro {
@@ -83,10 +87,12 @@
 .card.contador {
   width: 100%;
   align-items: flex;
+  
 }
 
 .text-obli {
   resize: none;
+  height: 10%;
 }
 
 .a-obli {

@@ -12,10 +12,10 @@ const EventoContadorHoras = (props) => {
     horasMinutosDesdeEventoMasReciente(eventosDelTipo);
   const horasDesdeUltimoEvento = tiempoDesdeUltimoEvento.substring(0, 2);
 
-  let estiloLetra = { color: "red" };
+  let estiloLetra = { color: "red", fontSize: "35px"  };
 
   if (Number(horasDesdeUltimoEvento) <4){
-     estiloLetra = { color: "green" };
+     estiloLetra = { color: "green", fontSize: "35px" };
   }
 
 

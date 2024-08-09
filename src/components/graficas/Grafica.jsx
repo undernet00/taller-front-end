@@ -40,7 +40,7 @@ const Grafica = (props) => {
 
 
   return (
-    <div>
+    <div className="card">
       <Bar
         options={options}
         data={{
