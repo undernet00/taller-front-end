@@ -79,13 +79,15 @@ const Dashboard = () => {
         <div className="col">
           <Grafica
             titulo="Listado de Eventos"
+            categoriasNombre="Categorías"
             datos={eventosPorCategoria}
             color="rgba(0, 99, 132, 0.5)"
           />
         </div>
         <div className="col">
           <Grafica
-            titulo="Comidas Semana"
+            titulo="Comidas de la Semana"
+            categoriasNombre="Comidas"
             datos={comidasDeLaSemana}
             color="rgba(150, 99, 132, 0.5)"
           />

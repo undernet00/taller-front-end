@@ -33,19 +33,16 @@ const options = {
 };
 
 const Grafica = (props) => {
-  useEffect(() => {
-    options.plugins.title.text = props.titulo;
-  }, []);
-
   return (
     <div className="card">
+      <h4>{props.titulo}</h4>
       <Bar
         options={options}
         data={{
           labels: props.datos.etiquetas,
           datasets: [
             {
-              label: "Categorías",
+              label: props.categoriasNombre,
               data: props.datos.valores,
               backgroundColor: props.color,
             },
