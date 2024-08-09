@@ -23,7 +23,8 @@ const Login = () => {
     }
   }, []);
 
-  const login = () => {
+  const handleLogin = (event) => {
+    event.preventDefault();
     let usuario = campoUsuario.current.value;
     let clave = campoClave.current.value;
 
@@ -36,7 +37,7 @@ const Login = () => {
           password: clave,
         }),
       };
-
+      const toastLogin = toast.loading("Iniciando sesión...");
       fetch(Const.URL_LOGIN, opcionesDeConsulta)
         .then((res) => {
           if (!res.ok) {
@@ -49,7 +50,13 @@ const Login = () => {
         .then((datos) => {
           switch (datos.codigo) {
             case 200:
-              toast.success("Login exitoso");
+              /* toast.success("Login exitoso"); */
+              toast.update(toastLogin, {
+                render: "Acceso correcto",
+                type: "success",
+                isLoading: false,
+                autoClose: 5000,
+              });
               window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
               window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
               window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
@@ -82,49 +89,46 @@ const Login = () => {
   return (
     <div className="card">
       <h2>Mi Bebé</h2>
-      <label>
-        Usuario:
+      <form onSubmit={handleLogin}>
+        <label>
+          Usuario:
+          <br />
+          <input
+            type="text"
+            id="user"
+            name="user"
+            ref={campoUsuario}
+            onChange={actualizarEstadoUsuario}
+          />
+        </label>
         <br />
-        <input
-          type="text"
-          id="user"
-          name="user"
-          ref={campoUsuario}
-          onChange={actualizarEstadoUsuario}
-        />
-      </label>
-
-      <label>
-        Contraseña:
+        <label>
+          Contraseña:
+          <br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ref={campoClave}
+            onChange={actualizarEstadoClave}
+            autoComplete="password"
+          />
+        </label>
         <br />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          ref={campoClave}
-          onChange={actualizarEstadoClave}
-        />
-      </label>
-      <br></br>
-      <div>
-        <button
-          className="btn btn-primary"
-          onClick={login}
-          disabled={usuarioVacio || claveVacio}
+        <br />
+        <div>
+          <input type="submit" />
+        </div>
+        <br></br>
+        <a
+          className="a-obli"
+          onClick={() => {
+            navigate("/registro");
+          }}
         >
-          Login
-        </button>
-      </div>
-      <br></br>
-      <a
-        className="a-obli"
-        onClick={() => {
-          navigate("/registro");
-        }}
-      >
-        ¿Nuevo en el sistema? Regístrate aquí
-      </a>
-
+          ¿Nuevo en el sistema? Regístrate aquí
+        </a>
+      </form>
       <br></br>
     </div>
   );
