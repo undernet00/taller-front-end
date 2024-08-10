@@ -26,7 +26,16 @@ const Menu = () => {
     return (
       <div className="col card">
         <div className="row">
-          <h2>Mi Bebé</h2>
+          <div className="col align-right-obli">
+            <img
+              src="../../baby.png"
+              alt="babé app logo"
+              className="nav-imagen-obli"
+            />
+          </div>
+          <div className="col nav-titulo-obli">
+            <h2>Mi Bebé</h2>
+          </div>
         </div>
         <div className="row">
           <div className="col align-left-obli">

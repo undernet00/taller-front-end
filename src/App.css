@@ -75,7 +75,6 @@
 .card.formulario {
   width: 100%;
   align-items: flex;
-  
 }
 
 .card.registro {
@@ -87,23 +86,21 @@
 .card.contador {
   width: 100%;
   align-items: flex;
-  
 }
 
 .text-obli {
   resize: none;
   height: 10%;
+  width: 100%;
 }
 
 .a-obli {
   text-decoration: none;
-
 }
 
 .a-obli:hover {
   text-decoration: none;
-  cursor:pointer;
-  
+  cursor: pointer;
 }
 
 .align-left-obli {
@@ -114,4 +111,29 @@
 }
 .align-center-obli {
   text-align: center;
+}
+
+.div-obli{
+  margin-right: 0px;
+  flex-direction: row;
+}
+
+.formulario-imagen-obli {
+  height: 38px;
+  width: 38px;
+  margin: auto;
+}
+
+.nav-imagen-obli {
+  height: 80px;
+  width: 70px;
+}
+
+.nav-titulo-obli {
+  text-align: left;
+  margin: auto;
+}
+
+.select-obli {
+  width: 170%;
 }

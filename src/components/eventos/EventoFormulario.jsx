@@ -86,43 +86,50 @@ const EventoFormulario = () => {
   return (
     <div className="card formulario">
       <div className="row">
-        <div className="col">
-          <label>
-            Categoría:
-            <br></br>
-            <Categorias />
-          </label>
+        <div className="col-8 align-left-obli">
+          <div className="row div-obli">
+            <div className="col">
+              <label>
+                Categoría:
+                <br></br>
+                <Categorias />
+              </label>
+            </div>
+            <div className="col">
+              <label>
+                Fecha/Hora:
+                <br></br>
+                <input
+                  type="datetime-local"
+                  className=""
+                  ref={campoFechaHora}
+                  defaultValue={fechaHoraActual()}
+                />
+              </label>
+            </div>
+          </div>
+          <div className="col align-left-obli">
+            <div className="row"></div>
+          </div>
+        </div>
+        <div className="col align-left-obli">
+          <div className="row">
+            <label>
+              Detalle:
+              <textarea
+                className="form-control form-control-lg text-obli div-obli"
+                ref={campoDetalle}
+              />
+            </label>
+          </div>
         </div>
 
-        <div className="col">
-          <label>
-            Fecha/Hora:
-            <br></br>
-            <input
-              type="datetime-local"
-              className=""
-              ref={campoFechaHora}
-              defaultValue={fechaHoraActual()}
-            />
-          </label>
+        <div>
+          <br />
+          <button onClick={handleGuardar} className="btn btn-primary btn-sm">
+            Guardar
+          </button>
         </div>
-      </div>
-
-      <div className="row">
-        <label>
-          Detalle:
-          <br></br>
-          <textarea
-            className="form-control form-control-lg text-obli"
-            ref={campoDetalle}
-          />
-        </label>
-      </div>
-
-      <div>
-        <button onClick={handleGuardar} className="btn btn-primary btn-sm">
-          Guardar
-        </button>
       </div>
     </div>
   );

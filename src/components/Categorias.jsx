@@ -46,18 +46,21 @@ const Categorias = () => {
 
   return (
     <>
-      <select
-        className="bg-light text-black"
-        onChange={(e) => {
-          dispatch(guardarCategoria(e.target.value));
-        }}
-      >
-        {categorias.map((item) => (
-          <option key={item.id} value={item.id}>
-            {item.tipo}{" "}
-          </option>
-        ))}
-      </select>
+      <div className="col">
+        <select
+          className="bg-light text-black select-obli"
+          onChange={(e) => {
+            let cat = e.target.value;
+            dispatch(guardarCategoria(cat));
+          }}
+        >
+          {categorias.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.tipo}
+            </option>
+          ))}
+        </select>
+      </div>
     </>
   );
 };
