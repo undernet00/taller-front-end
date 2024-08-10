@@ -38,6 +38,7 @@ const Registro = () => {
   };
 
   const handleGuardar = () => {
+    event.preventDefault();
     const opcionesDeConsulta = {
       method: "POST",
       header: Const.JSON_HEADER,
@@ -54,6 +55,8 @@ const Registro = () => {
         return res.json();
       })
       .then((datos) => {
+        console.log(datos);
+
         switch (datos.codigo) {
           case 200:
             window.localStorage.setItem(
@@ -62,7 +65,6 @@ const Registro = () => {
             );
             window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
             window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
-
             toast.success("Registro exitoso");
             navigate("/dashboard");
             break;
@@ -81,39 +83,44 @@ const Registro = () => {
   return (
     <div className="card formulario">
       <h2>Registro</h2>
-      <label>
-        Usuario:
+      <form onSubmit={handleGuardar}>
+        <label>
+          Usuario:
+          <br></br>
+          <input type="text" ref={campoUsuario} onChange={validarFormulario} />
+        </label>
+        <br />
+        <label>
+          Contraseña:
+          <br></br>
+          <input type="text" ref={campoClave} onChange={validarFormulario} />
+        </label>
         <br></br>
-        <input type="text" ref={campoUsuario} onChange={validarFormulario} />
-      </label>
-      <br></br>
-      <label>
-        Contraseña:
+
+        <label>
+          Departamento:
+          <br></br>
+          <Departamentos />
+        </label>
         <br></br>
-        <input type="text" ref={campoClave} onChange={validarFormulario} />
-      </label>
-      <br></br>
-      
-      <label>
-        Departamento:
+        <label>
+          Ciudad:
+          <br></br>
+          <Ciudades />
+        </label>
         <br></br>
-        <Departamentos />
-      </label>
-      <br></br>
-      <label>
-        Ciudad:
         <br></br>
-        <Ciudades />
-      </label>
-      <br></br>
-      <br></br>
-      <button
-        className="btn btn-primary"
-        onClick={handleGuardar}
-        disabled={desactivarBoton}
-      >
-        Guardar
-      </button>
+        <input type="submit" disabled={desactivarBoton} />
+        <br></br>
+        <a
+          className="a-obli"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Volver
+        </a>
+      </form>
     </div>
   );
 };
