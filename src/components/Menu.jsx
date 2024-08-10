@@ -26,7 +26,7 @@ const Menu = () => {
     return (
       <div className="col card">
         <div className="row">
-          <h2>Dashboard</h2>
+          <h2>Mi Bebé</h2>
         </div>
         <div className="row">
           <div className="col align-left-obli">
@@ -43,7 +43,7 @@ const Menu = () => {
   } else {
     return (
       <div>
-        <h2>Dashboard</h2>
+        <h2>Mi Bebé</h2>
         <p>Debe iniciar sesión.</p>
       </div>
     );

@@ -48,35 +48,6 @@ const Dashboard = () => {
       </div>
       <div className="row">
         <div className="col">
-          <div className="div-obli">
-            <Eventos />
-          </div>
-          <div className="div-obli">
-            <EventoFormulario />
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <div className="div-obli">
-                <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
-              </div>
-            </div>
-            <div className="col">
-              <div className="div-obli">
-                <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="div-obli">
-              <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
           <Grafica
             titulo="Listado de Eventos"
             categoriasNombre="Categorías"
@@ -91,6 +62,25 @@ const Dashboard = () => {
             datos={comidasDeLaSemana}
             color="rgba(150, 99, 132, 0.5)"
           />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <InformePorTipoEvento idCategoria={Const.CATEGORIA_BIBERON} />
+        </div>
+        <div className="col">
+          <InformePorTipoEvento idCategoria={Const.CATEGORIA_PANAL} />
+        </div>
+        <div className="col">
+          <EventoContadorHoras idCategoria={Const.CATEGORIA_BIBERON} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <EventoFormulario />
+        </div>
+        <div className="col">
+          <Eventos />
         </div>
       </div>
     </div>
