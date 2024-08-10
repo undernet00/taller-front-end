@@ -117,7 +117,7 @@ const Login = () => {
         <br />
         <br />
         <div>
-          <input type="submit" />
+          <input type="submit" disabled={usuarioVacio || claveVacio} />
         </div>
         <br></br>
         <a

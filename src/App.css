@@ -97,6 +97,13 @@
 
 .a-obli {
   text-decoration: none;
+
+}
+
+.a-obli:hover {
+  text-decoration: none;
+  cursor:pointer;
+  
 }
 
 .align-left-obli {
