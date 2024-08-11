@@ -1,12 +1,8 @@
-import { useEffect } from "react";
 import Evento from "./Evento";
-import { useDispatch, useSelector } from "react-redux";
-import { guardarEventos } from "../../features/eventosSlice";
+import { useSelector } from "react-redux";
 import { getEventosParticionadosPorTiempo } from "./EventoUtils";
 
 const EventosLista = (props) => {
-  const dispatch = useDispatch();
-
   const eventos = useSelector((state) => state.eventos.eventos);
 
   return (
@@ -20,9 +16,11 @@ const EventosLista = (props) => {
             <th>Fecha/Hora</th>
           </tr>
 
-          {getEventosParticionadosPorTiempo(eventos, props.actuales).map((evento) => (
-            <Evento key={evento.id} {...evento} />
-          ))}
+          {getEventosParticionadosPorTiempo(eventos, props.actuales).map(
+            (evento) => (
+              <Evento key={evento.id} {...evento} />
+            )
+          )}
         </tbody>
       </table>
     </>

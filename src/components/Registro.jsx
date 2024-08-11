@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as Const from "../Constantes";
 import Departamentos from "./Departamentos";
 import Ciudades from "./Ciudades";

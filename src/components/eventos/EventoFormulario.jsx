@@ -1,5 +1,5 @@
 import * as Const from "../../Constantes";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Categorias from "../Categorias";
 import { useDispatch, useSelector } from "react-redux";
 import { agregarEvento } from "../../features/eventosSlice";
@@ -79,7 +79,9 @@ const EventoFormulario = () => {
           });
       }
     } else {
-      toast.error("Los datos en el formulario son inválidos. La fecha no puede ser futura.");
+      toast.error(
+        "Los datos en el formulario son inválidos. La fecha no puede ser futura."
+      );
     }
   };
 

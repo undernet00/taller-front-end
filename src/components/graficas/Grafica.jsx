@@ -7,7 +7,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(

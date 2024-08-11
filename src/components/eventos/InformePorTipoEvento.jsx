@@ -8,7 +8,6 @@ import {
 
 const InformePorTipoEvento = (props) => {
   //El re render de este componente lo disparan los cambios sobre Eventos. Que está en el estado global.
-  //TODO: Hacer 1 sola línea con esto.
   const eventos = useSelector((state) => state.eventos.eventos);
   const categorias = useSelector((state) => state.categorias.categorias);
   const eventosDeHoy = getEventosParticionadosPorTiempo(eventos, true);

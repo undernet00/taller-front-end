@@ -91,6 +91,7 @@ export const milisegundosAHorasMinutos = (tiempoEnMilisegundos) => {
 
   return { horas, minutos };
 };
+
 export function fechaHoraUltimoEvento(eventos) {
   let eventosPorFechaDecreciente = ordenarEventosPorTiempoDecreciente(eventos);
 
