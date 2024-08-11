@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Const from "../Constantes";
 import { useNavigate } from "react-router-dom";
+import {Logo} from "./Logo";
 
 const Menu = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");
@@ -26,16 +27,7 @@ const Menu = () => {
     return (
       <div className="col card">
         <div className="row">
-          <div className="col align-right-obli">
-            <img
-              src="../../baby.png"
-              alt="babé app logo"
-              className="nav-imagen-obli"
-            />
-          </div>
-          <div className="col nav-titulo-obli">
-            <h2>Mi Bebé</h2>
-          </div>
+          <Logo/>
         </div>
         <div className="row">
           <div className="col align-left-obli">

@@ -5,6 +5,7 @@ import Ciudades from "./Ciudades";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Logo from "./Logo";
 
 const Registro = () => {
   const campoUsuario = useRef(null);
@@ -79,7 +80,8 @@ const Registro = () => {
 
   return (
     <div className="card formulario">
-      <h2>Registro</h2>
+      <Logo />
+
       <form onSubmit={handleGuardar}>
         <label>
           Usuario:

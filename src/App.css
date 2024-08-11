@@ -139,3 +139,12 @@
   width: 170%;
   border: 1px solid black
 }
+
+.logo-obli {
+  vertical-align: middle;
+}
+
+.logo-center-obli {
+  vertical-align: middle;
+  align-items:center ;
+}

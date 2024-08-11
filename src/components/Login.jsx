@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import * as Const from "../Constantes";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Logo from "./Logo";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -88,7 +89,7 @@ const Login = () => {
 
   return (
     <div className="card">
-      <h2>Mi Bebé</h2>
+      <Logo/>
       <form onSubmit={handleLogin}>
         <label>
           Usuario:
