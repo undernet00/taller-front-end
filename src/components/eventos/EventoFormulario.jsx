@@ -79,7 +79,7 @@ const EventoFormulario = () => {
           });
       }
     } else {
-      toast.error("Los datos en el formulario son inválidos");
+      toast.error("Los datos en el formulario son inválidos. La fecha no puede ser futura.");
     }
   };
 

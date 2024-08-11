@@ -90,9 +90,9 @@
 
 .text-obli {
   resize: none;
-  height: 10%;
+  height: 70%;
   width: 100%;
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .a-obli {
