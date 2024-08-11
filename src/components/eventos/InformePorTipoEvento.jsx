@@ -35,7 +35,7 @@ const InformePorTipoEvento = (props) => {
       <br />
       <p>Total de eventos en el día: {eventosDelTipoBuscado.length}</p>
 
-      <p>Tiempo desde el último evento: {tiempoDesdeUltimoEvento}</p>
+      <p>Tiempo desde el último evento de hoy: {tiempoDesdeUltimoEvento}</p>
     </div>
   );
 };

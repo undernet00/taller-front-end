@@ -21,9 +21,6 @@ const Registro = () => {
     (state) => state.deptociudad.deptociudad.departamento
   );
 
-  // Controlar datos del formulario
-  // Postear el nuevo usuario
-
   const validarFormulario = () => {
     if (
       campoUsuario.current.value !== "" &&
@@ -69,7 +66,7 @@ const Registro = () => {
             navigate("/dashboard");
             break;
           default:
-            toast.error("Error inesperado.");
+            toast.error(datos.mensaje);
             console.log();
         }
       })

@@ -49,10 +49,7 @@ export const ListadoComidasSemana = (eventos) => {
     let comidasUltimaSemanaOrdenada =
       ordenarEventosPorTiempoAscendente(comidasUltimaSemana);
 
-    /*   let diaInicio = comidasUltimaSemanaOrdenada.map((c) =>
-      new Date(c.fecha).getDay()
-    )[0]; */
-    let diaInicio = new Date().getDay();
+    let diaInicio = new Date().getDay(); //Hoy
 
     let diasDeLaUltimaSemana = ultimos7Dias(diaInicio);
 
@@ -87,5 +84,6 @@ const ultimos7Dias = (inicial) => {
       if (diaActual < 0) diaActual = 6;
     }
   }
+  
   return respuesta;
 };

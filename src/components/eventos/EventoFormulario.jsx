@@ -100,7 +100,7 @@ const EventoFormulario = () => {
                 Fecha/Hora:
                 <br></br>
                 <input
-                  type="select-obli"
+                  type="datetime-local"
                   ref={campoFechaHora}
                   defaultValue={fechaHoraActual()}
                 />
