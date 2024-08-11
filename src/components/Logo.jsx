@@ -2,7 +2,8 @@ export const Logo = () => {
   return (
     <>
       <div className="row logo-center-obli">
-        <div className="col-5 align-right-obli logo-obli">
+        <div className="align-center-obli"></div>
+        <div className="col align-right-obli logo-obli">
           <img
             src="../../baby.png"
             alt="babé app logo"
