@@ -49,11 +49,12 @@ export const ListadoComidasSemana = (eventos) => {
     let comidasUltimaSemanaOrdenada =
       ordenarEventosPorTiempoAscendente(comidasUltimaSemana);
 
-    let diaInicio = comidasUltimaSemanaOrdenada.map((c) =>
+    /*   let diaInicio = comidasUltimaSemanaOrdenada.map((c) =>
       new Date(c.fecha).getDay()
-    )[0];
+    )[0]; */
+    let diaInicio = new Date().getDay();
 
-    let diasDeLaUltimaSemana = arrayDeDias(diaInicio);
+    let diasDeLaUltimaSemana = ultimos7Dias(diaInicio);
 
     // Domingo -> Sábado : 0 -> 6
     for (let i = 0; i <= diasDeLaUltimaSemana.length - 1; i++) {
@@ -68,16 +69,23 @@ export const ListadoComidasSemana = (eventos) => {
   return respuesta;
 };
 
-//Retorna una lista de días de la semana consecutivos que comienza en el día especificado
-//Ej: [6,0,1,2,3,4,5] Comienza en sábado, tiene 7 días y termina en viernes.
-const arrayDeDias = (inicial) => {
-  let respuesta = [];
+//Retorna una lista de días con los últimos 7 días incluyendo el actual.
+//Ej: [6,0,1,2,3,4,5] termina el viernes, va hacia atrás, y comienza en sábado.
+const ultimos7Dias = (inicial) => {
+  let respuesta = [0, 0, 0, 0, 0, 0, 0];
+
   if (inicial !== undefined && inicial < 7) {
-    respuesta.push(inicial);
-    do {
-      let siguiente = respuesta[respuesta.length - 1] + 1;
-      siguiente !== 7 ? respuesta.push(siguiente) : respuesta.push(0);
-    } while (respuesta.length < 7);
+    let diaAnterior = 0;
+    let diaActual = inicial;
+
+    for (let i = respuesta.length - 1; i >= 0; i--) {
+      if (diaActual >= 0 && diaActual <= 6) {
+        respuesta[i] = diaActual;
+      }
+      diaActual--;
+
+      if (diaActual < 0) diaActual = 6;
+    }
   }
   return respuesta;
 };

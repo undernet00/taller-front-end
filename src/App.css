@@ -92,6 +92,7 @@
   resize: none;
   height: 10%;
   width: 100%;
+  border: 1px solid black
 }
 
 .a-obli {
@@ -113,7 +114,7 @@
   text-align: center;
 }
 
-.div-obli{
+.div-obli {
   margin-right: 0px;
   flex-direction: row;
 }
@@ -136,4 +137,5 @@
 
 .select-obli {
   width: 170%;
+  border: 1px solid black
 }
