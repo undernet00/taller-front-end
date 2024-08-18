@@ -1,9 +1,14 @@
-import * as Const from "../../Constantes";
-import { useRef, useState } from "react";
-import Categorias from "../Categorias";
-import { useDispatch, useSelector } from "react-redux";
-import { agregarEvento } from "../../features/eventosSlice";
 import { toast } from "react-toastify";
+
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { agregarEvento } from "../../features/eventosSlice";
+import Categorias from "../Categorias";
+
+import * as Const from "../../Constantes";
+import * as LocalData from "../../LocalData";
+
 const EventoFormulario = () => {
   const dispatch = useDispatch();
 
@@ -32,13 +37,12 @@ const EventoFormulario = () => {
   };
 
   const handleGuardar = () => {
-    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
-
-    if (apikey === null || apikey === "" || idUsuario === "") {
+    if (!LocalData.EstaLogueado()) {
       toast.error(Const.ERROR_APIKEY);
       return;
     }
+
+    let { apikey, idUsuario } = LocalData.LeerDatos();
 
     if (formularioEsValido()) {
       const headers = new Headers();

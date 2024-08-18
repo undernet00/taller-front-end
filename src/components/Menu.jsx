@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import * as Const from "../Constantes";
+import * as LocalData from "../LocalData";
 import { useNavigate } from "react-router-dom";
-import {Logo} from "./Logo";
+import { Logo } from "./Logo";
 
 const Menu = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");
@@ -9,16 +9,15 @@ const Menu = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
-    if (usuario !== "" && usuario !== "undefined") {
-      setNombreUsuario(usuario);
+    let { nombreUsuario } = LocalData.LeerDatos();
+
+    if (LocalData.EstaLogueado()) {
+      setNombreUsuario(nombreUsuario);
     }
   });
 
   const handleLogout = () => {
-    window.localStorage.setItem(Const.LOCAL_USUARIO, "");
-    window.localStorage.setItem(Const.LOCAL_ID_USUARIO, "");
-    window.localStorage.setItem(Const.LOCAL_API_KEY, "");
+    LocalData.InicializarData();
     setNombreUsuario("");
     navigate("/");
   };
@@ -27,7 +26,7 @@ const Menu = () => {
     return (
       <div className="col card">
         <div className="row">
-          <Logo/>
+          <Logo />
         </div>
         <div className="row">
           <div className="col align-left-obli">

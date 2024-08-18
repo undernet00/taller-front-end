@@ -1,8 +1,3 @@
-//Local Storage Keys
-export const LOCAL_API_KEY = "apikey";
-export const LOCAL_USUARIO = "usuario";
-export const LOCAL_ID_USUARIO = "idusuario";
-
 //Headers
 export const HEADER_API_KEY = "apikey";
 export const HEADER_ID_USUARIO = "iduser";
@@ -39,6 +34,6 @@ export const CATEGORIA_BIBERON = 35;
 export const CATEGORIA_COMIDA = 31;
 
 //Mensajes de Error
-export const ERROR_USUARIO_PASS = "Usuario y/o contraseña incorrectos"
-export const ERROR_APIKEY = "Falta ApiKey o Id de usuario"
-export const ERROR_CONSULTA_API = "Error al obtener los datos"
+export const ERROR_USUARIO_PASS = "Usuario y/o contraseña incorrectos";
+export const ERROR_APIKEY = "Falta ApiKey o Id de usuario";
+export const ERROR_CONSULTA_API = "Error al obtener los datos";

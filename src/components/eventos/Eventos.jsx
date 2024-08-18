@@ -1,4 +1,5 @@
 import * as Const from "../../Constantes";
+import * as LocalData from "../../LocalData";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarEventos } from "../../features/eventosSlice";
@@ -16,14 +17,12 @@ const Eventos = () => {
   };
 
   useEffect(() => {
-    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
-
-    if (apikey === null || apikey === "" || idUsuario === "") {
+    if (!LocalData.EstaLogueado()) {
       toast.error(Const.ERROR_APIKEY);
-
       return;
     }
+
+    let { apikey, idUsuario } = LocalData.LeerDatos();
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
