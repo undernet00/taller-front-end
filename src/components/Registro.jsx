@@ -1,10 +1,14 @@
 import { useRef, useState } from "react";
-import * as Const from "../Constantes";
-import Departamentos from "./Departamentos";
-import Ciudades from "./Ciudades";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import * as Const from "../Constantes";
+import * as Rest from "../RestHelper";
+import * as LocalData from "../LocalData";
+
+import Departamentos from "./Departamentos";
+import Ciudades from "./Ciudades";
 import Logo from "./Logo";
 
 const Registro = () => {
@@ -37,32 +41,26 @@ const Registro = () => {
 
   const handleGuardar = () => {
     event.preventDefault();
-    const opcionesDeConsulta = {
-      method: "POST",
-      header: Const.JSON_HEADER,
-      body: JSON.stringify({
-        usuario: campoUsuario.current.value,
-        password: campoClave.current.value,
-        idDepartamento: departamentoSeleccionado,
-        idCiudad: ciudadSeleccionada,
-      }),
-    };
 
-    fetch(Const.URL_REGISTRO, opcionesDeConsulta)
+    let body = JSON.stringify({
+      usuario: campoUsuario.current.value,
+      password: campoClave.current.value,
+      idDepartamento: departamentoSeleccionado,
+      idCiudad: ciudadSeleccionada,
+    });
+
+    fetch(Rest.URL_REGISTRO, Rest.OpcionesParaPOST(body))
       .then((res) => {
         return res.json();
       })
       .then((datos) => {
-        console.log(datos);
-
         switch (datos.codigo) {
           case 200:
-            window.localStorage.setItem(
-              Const.LOCAL_USUARIO,
+            LocalData.GuardarDatos(
+              datos.apiKey,
+              datos.id,
               campoUsuario.current.value
             );
-            window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-            window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
             toast.success("Registro exitoso");
             navigate("/dashboard");
             break;

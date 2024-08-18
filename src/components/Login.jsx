@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import * as Const from "../Constantes";
+import * as LocalData from "../LocalData";
+import * as Rest from "../RestHelper";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "./Logo";
@@ -13,14 +15,8 @@ const Login = () => {
   let campoClave = useRef(null);
 
   useEffect(() => {
-    let usuario = window.localStorage.getItem(Const.LOCAL_USUARIO);
-    let apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-
-    //Inicializa las keys en local storage si no hay datos
-    if (usuario === null || apikey === null) {
-      window.localStorage.setItem(Const.LOCAL_USUARIO, "");
-      window.localStorage.setItem(Const.LOCAL_API_KEY, "");
-      window.localStorage.setItem(Const.LOCAL_ID_USUARIO, "");
+    if (LocalData.EstaLogueado()) {
+      navigate("/dashboard");
     }
   }, []);
 
@@ -30,16 +26,13 @@ const Login = () => {
     let clave = campoClave.current.value;
 
     if (usuario !== "" && clave !== "") {
-      const opcionesDeConsulta = {
-        method: "POST",
-        header: Const.JSON_HEADER,
-        body: JSON.stringify({
-          usuario: usuario,
-          password: clave,
-        }),
-      };
+      let body = JSON.stringify({
+        usuario: usuario,
+        password: clave,
+      });
+
       const toastLogin = toast.loading("Iniciando sesión...");
-      fetch(Const.URL_LOGIN, opcionesDeConsulta)
+      fetch(Rest.URL_LOGIN, Rest.OpcionesParaPOST(body))
         .then((res) => {
           if (!res.ok) {
             toast.error(Const.Const.ERROR_CONSULTA_API);
@@ -51,16 +44,14 @@ const Login = () => {
         .then((datos) => {
           switch (datos.codigo) {
             case 200:
-              /* toast.success("Login exitoso"); */
               toast.update(toastLogin, {
                 render: "Acceso correcto",
                 type: "success",
                 isLoading: false,
-                autoClose: 5000,
+                autoClose: 3000,
               });
-              window.localStorage.setItem(Const.LOCAL_USUARIO, usuario);
-              window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-              window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
+
+              LocalData.GuardarDatos(datos.apiKey, datos.id, usuario);
               navigate("/dashboard");
               break;
             case 409:
@@ -89,7 +80,7 @@ const Login = () => {
 
   return (
     <div className="card">
-      <Logo/>
+      <Logo />
       <form onSubmit={handleLogin}>
         <label>
           Usuario:

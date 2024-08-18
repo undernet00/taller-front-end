@@ -1,9 +1,15 @@
-import * as Const from "../../Constantes";
-import { useRef, useState } from "react";
-import Categorias from "../Categorias";
-import { useDispatch, useSelector } from "react-redux";
-import { agregarEvento } from "../../features/eventosSlice";
 import { toast } from "react-toastify";
+
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { agregarEvento } from "../../features/eventosSlice";
+import Categorias from "../Categorias";
+
+import * as Const from "../../Constantes";
+import * as LocalData from "../../LocalData";
+import * as Rest from "../../RestHelper";
+
 const EventoFormulario = () => {
   const dispatch = useDispatch();
 
@@ -32,20 +38,14 @@ const EventoFormulario = () => {
   };
 
   const handleGuardar = () => {
-    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
-
-    if (apikey === null || apikey === "" || idUsuario === "") {
+    if (!LocalData.EstaLogueado()) {
       toast.error(Const.ERROR_APIKEY);
       return;
     }
 
-    if (formularioEsValido()) {
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      headers.append(Const.HEADER_API_KEY, apikey);
-      headers.append(Const.HEADER_ID_USUARIO, idUsuario);
+    let { apiKey, idUsuario } = LocalData.LeerDatos();
 
+    if (formularioEsValido()) {
       let evento = {
         id: 0,
         idCategoria: Number(categoriaSeleccionada),
@@ -55,13 +55,12 @@ const EventoFormulario = () => {
       };
 
       if (categoriaSeleccionada !== 0 && campoFechaHora.current.value !== "") {
-        const opcionesDeConsulta = {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(evento),
-        };
+        let body = JSON.stringify(evento);
 
-        fetch(Const.URL_EVENTOS_POST, opcionesDeConsulta)
+        fetch(
+          Rest.URL_EVENTOS_POST,
+          Rest.OpcionesParaPOST(body, apiKey, idUsuario)
+        )
           .then((res) => {
             if (!res.ok) {
               toast.error(Const.ERROR_CONSULTA_API);

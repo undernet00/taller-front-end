@@ -1,4 +1,5 @@
 import * as Const from "../Constantes";
+import * as Rest from "../RestHelper";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarCiudad } from "../features/deptoCiudadSlice";
@@ -17,16 +18,11 @@ const Ciudades = () => {
   );
 
   useEffect(() => {
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    const opcionesDeConsulta = {
-      method: "GET",
-      headers: headers,
-    };
-
     if (departamentoSeleccionado !== 0) {
-      fetch(Const.URL_CIUDADES + departamentoSeleccionado, opcionesDeConsulta)
+      fetch(
+        Rest.URL_CIUDADES + departamentoSeleccionado,
+        Rest.OpcionesParaGET("", "")
+      )
         .then((res) => {
           if (!res.ok) {
             toast.error(Const.ERROR_CONSULTA_API);

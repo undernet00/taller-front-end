@@ -1,4 +1,6 @@
 import * as Const from "../../Constantes";
+import * as LocalData from "../../LocalData";
+import * as Rest from "../../RestHelper";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { guardarEventos } from "../../features/eventosSlice";
@@ -16,26 +18,17 @@ const Eventos = () => {
   };
 
   useEffect(() => {
-    const apikey = window.localStorage.getItem(Const.LOCAL_API_KEY);
-    const idUsuario = window.localStorage.getItem(Const.LOCAL_ID_USUARIO);
-
-    if (apikey === null || apikey === "" || idUsuario === "") {
+    if (!LocalData.EstaLogueado()) {
       toast.error(Const.ERROR_APIKEY);
-
       return;
     }
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY, apikey);
-    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
+    let { apiKey, idUsuario } = LocalData.LeerDatos();
 
-    const opcionesDeConsulta = {
-      method: "GET",
-      headers: headers,
-    };
-
-    fetch(Const.URL_EVENTOS_GET + idUsuario, opcionesDeConsulta)
+    fetch(
+      Rest.URL_EVENTOS_GET + idUsuario,
+      Rest.OpcionesParaGET(apiKey, idUsuario)
+    )
       .then((res) => {
         if (!res.ok) {
           toast.error(Const.ERROR_CONSULTA_API);
