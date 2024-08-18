@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Const from "../Constantes";
 import * as LocalData from "../LocalData";
+import * as Rest from "../RestHelper";
 import {
   guardarCategorias,
   guardarCategoria,
@@ -19,19 +20,9 @@ const Categorias = () => {
       return;
     }
 
-    let { apikey, idUsuario } = LocalData.LeerDatos();
+    let { apiKey, idUsuario } = LocalData.LeerDatos();
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY, apikey);
-    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
-
-    const opcionesDeConsulta = {
-      method: "GET",
-      headers: headers,
-    };
-
-    fetch(Const.URL_CATEGORIAS, opcionesDeConsulta)
+    fetch(Rest.URL_CATEGORIAS, Rest.OpcionesParaGET(apiKey, idUsuario))
       .then((res) => {
         if (!res.ok) {
           toast.error(Const.ERROR_CONSULTA_API);
