@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as Const from "../Constantes";
+import * as Rest from "../RestHelper";
+import * as LocalData from "../LocalData";
 
 import Departamentos from "./Departamentos";
 import Ciudades from "./Ciudades";
@@ -39,24 +41,19 @@ const Registro = () => {
 
   const handleGuardar = () => {
     event.preventDefault();
-    const opcionesDeConsulta = {
-      method: "POST",
-      header: Const.JSON_HEADER,
-      body: JSON.stringify({
-        usuario: campoUsuario.current.value,
-        password: campoClave.current.value,
-        idDepartamento: departamentoSeleccionado,
-        idCiudad: ciudadSeleccionada,
-      }),
-    };
 
-    fetch(Const.URL_REGISTRO, opcionesDeConsulta)
+    let body = JSON.stringify({
+      usuario: campoUsuario.current.value,
+      password: campoClave.current.value,
+      idDepartamento: departamentoSeleccionado,
+      idCiudad: ciudadSeleccionada,
+    });
+
+    fetch(Rest.URL_REGISTRO, Rest.OpcionesParaPOST(body))
       .then((res) => {
         return res.json();
       })
       .then((datos) => {
-        console.log(datos);
-
         switch (datos.codigo) {
           case 200:
             LocalData.GuardarDatos(

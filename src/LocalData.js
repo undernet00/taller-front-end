@@ -22,7 +22,7 @@ export const LeerDatos = () => {
     nombreUsuario = "";
   }
 
-  return { apikey: apikey, idUsuario: idUsuario, nombreUsuario: nombreUsuario };
+  return { apiKey: apikey, idUsuario: idUsuario, nombreUsuario: nombreUsuario };
 };
 
 export const InicializarData = () => {

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as Const from "../../Constantes";
 import * as LocalData from "../../LocalData";
+import * as Rest from "../../RestHelper";
 
 import { eliminarEvento } from "../../features/eventosSlice";
 import { urlImagenCategoria } from "./EventoUtils";
@@ -18,20 +19,12 @@ const Evento = (props) => {
       return;
     }
 
-    let { apikey, idUsuario } = LocalData.LeerDatos();
+    let { apiKey, idUsuario } = LocalData.LeerDatos();
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append(Const.HEADER_API_KEY, apikey);
-    headers.append(Const.HEADER_ID_USUARIO, idUsuario);
-
-    //TODO: NTH Preguntar al usuario antes de eliminar
-    const opcionesDeConsulta = {
-      method: "DELETE",
-      headers: headers,
-    };
-
-    fetch(Const.URL_EVENTOS_DELETE + props.id, opcionesDeConsulta)
+    fetch(
+      Rest.URL_EVENTOS_DELETE + props.id,
+      Rest.OpcionesParaDELETE(apiKey, idUsuario)
+    )
       .then((res) => {
         if (!res.ok) {
           toast.error(Const.ERROR_CONSULTA_API);

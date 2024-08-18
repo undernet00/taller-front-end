@@ -8,6 +8,7 @@ import Categorias from "../Categorias";
 
 import * as Const from "../../Constantes";
 import * as LocalData from "../../LocalData";
+import * as Rest from "../../RestHelper";
 
 const EventoFormulario = () => {
   const dispatch = useDispatch();
@@ -42,14 +43,9 @@ const EventoFormulario = () => {
       return;
     }
 
-    let { apikey, idUsuario } = LocalData.LeerDatos();
+    let { apiKey, idUsuario } = LocalData.LeerDatos();
 
     if (formularioEsValido()) {
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      headers.append(Const.HEADER_API_KEY, apikey);
-      headers.append(Const.HEADER_ID_USUARIO, idUsuario);
-
       let evento = {
         id: 0,
         idCategoria: Number(categoriaSeleccionada),
@@ -59,13 +55,12 @@ const EventoFormulario = () => {
       };
 
       if (categoriaSeleccionada !== 0 && campoFechaHora.current.value !== "") {
-        const opcionesDeConsulta = {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(evento),
-        };
+        let body = JSON.stringify(evento);
 
-        fetch(Const.URL_EVENTOS_POST, opcionesDeConsulta)
+        fetch(
+          Rest.URL_EVENTOS_POST,
+          Rest.OpcionesParaPOST(body, apiKey, idUsuario)
+        )
           .then((res) => {
             if (!res.ok) {
               toast.error(Const.ERROR_CONSULTA_API);

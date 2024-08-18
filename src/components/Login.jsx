@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import * as Const from "../Constantes";
 import * as LocalData from "../LocalData";
+import * as Rest from "../RestHelper";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "./Logo";
@@ -25,16 +26,13 @@ const Login = () => {
     let clave = campoClave.current.value;
 
     if (usuario !== "" && clave !== "") {
-      const opcionesDeConsulta = {
-        method: "POST",
-        header: Const.JSON_HEADER,
-        body: JSON.stringify({
-          usuario: usuario,
-          password: clave,
-        }),
-      };
+      let body = JSON.stringify({
+        usuario: usuario,
+        password: clave,
+      });
+
       const toastLogin = toast.loading("Iniciando sesión...");
-      fetch(Const.URL_LOGIN, opcionesDeConsulta)
+      fetch(Rest.URL_LOGIN, Rest.OpcionesParaPOST(body))
         .then((res) => {
           if (!res.ok) {
             toast.error(Const.Const.ERROR_CONSULTA_API);
