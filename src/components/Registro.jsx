@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
-import * as Const from "../Constantes";
-import Departamentos from "./Departamentos";
-import Ciudades from "./Ciudades";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import * as Const from "../Constantes";
+
+import Departamentos from "./Departamentos";
+import Ciudades from "./Ciudades";
 import Logo from "./Logo";
 
 const Registro = () => {
@@ -57,12 +59,11 @@ const Registro = () => {
 
         switch (datos.codigo) {
           case 200:
-            window.localStorage.setItem(
-              Const.LOCAL_USUARIO,
+            LocalData.GuardarDatos(
+              datos.apiKey,
+              datos.id,
               campoUsuario.current.value
             );
-            window.localStorage.setItem(Const.LOCAL_API_KEY, datos.apiKey);
-            window.localStorage.setItem(Const.LOCAL_ID_USUARIO, datos.id);
             toast.success("Registro exitoso");
             navigate("/dashboard");
             break;
