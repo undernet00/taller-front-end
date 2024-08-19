@@ -2,7 +2,7 @@
 
 *Universidad ORT del Uruguay*
 
-![captura de pantalla de la app](image.jpg)
+![captura de pantalla de la app](readme.png)
 
 ## Requerimientos
 Descripción
