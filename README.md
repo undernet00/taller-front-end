@@ -2,6 +2,8 @@
 
 *Universidad ORT del Uruguay*
 
+![captura de pantalla de la app](image.jpg)
+
 ## Requerimientos
 Descripción
 La aplicación deberá permitir al usuario registrar los eventos va haciendo el bebé en el día o días anteriores. Con cada ingreso la aplicación deberá actualizar los datos estadísticos y métricas en tiempo real, en la misma pantalla y sin la necesidad de refrescar el navegador. Se deberá prestar atención a los servicios disponibles en la API para poder utilizar los necesarios. 
